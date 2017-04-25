@@ -420,7 +420,7 @@ class DocumentToText
                         array('<w:br/>', '</w:p>', '<text:line-break', '<text:p'),
                         array("\n<w:br/>", "\n</w:p>", "\n<text:line-break", "\n<text:p"), $raw_text);
                 // Return data without XML formatting tags
-                return utf8_encode(strip_tags($raw_text_patched));
+                return strip_tags($raw_text_patched);
             }
             $zip->close();
         }
