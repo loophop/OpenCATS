@@ -1,6 +1,7 @@
 <!-- NOSPACEFILTER -->
 <html>
     <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
         <?php if (!empty($this->data)): ?>
             <title>
                 Candidates - Preview
