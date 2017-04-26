@@ -1096,6 +1096,9 @@ class AttachmentCreator
             }
             else
             {
+                // $file  = 'maqiulogconvert.txt';
+                // file_put_contents($file, 'converting:'.$tempFilename.' with size '.filesize($tempFilename).' type '.$documentType.PHP_EOL,FILE_APPEND);
+
                 $documentToText->convert($tempFilename, $documentType);
 
                 if ($documentToText->isError())

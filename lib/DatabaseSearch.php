@@ -359,7 +359,8 @@ class DatabaseSearch
         /* Word searches. */
         $string = preg_replace(
             "/word\[\(\'([^\)]+)\'\)\]full/",
-            '(' . $tableField . ' REGEXP \'[[:<:]]\\1[[:>:]]\')',
+            '(' . $tableField . ' REGEXP \'\\1\')',
+            // '(' . $tableField . ' REGEXP \'[[:<:]]\\1[[:>:]]\')',
             $string
         );
 

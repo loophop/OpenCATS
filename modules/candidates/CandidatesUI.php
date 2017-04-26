@@ -2001,6 +2001,10 @@ class CandidatesUI extends UserInterface
 
                 foreach ($rs as $rowIndex => $row)
                 {
+
+                // $file  = 'maqiulog.txt';
+                // file_put_contents($file, '$rowIndex-> '.$rowIndex.' $baseURL '.$baseURL.' $sortBy'.$sortBy.' $sortDirection'.$sortDirection.PHP_EOL,FILE_APPEND);
+
                     $rs[$rowIndex]['excerpt'] = SearchUtility::searchExcerpt(
                         $query, $row['text']
                     );

@@ -122,9 +122,9 @@ class DocumentToText
                     return false;
                 }
 
-                $nativeEncoding = 'ISO-8859-1';
+                $nativeEncoding = 'UTF-8';
                 $convertEncoding = false;
-                $command = '"'. PDFTOTEXT_PATH . '" -layout ' . $escapedFilename . ' -';
+                $command = '"'. PDFTOTEXT_PATH . '" -layout ' . $fileName . ' -';
                 break;
 
             case DOCUMENT_TYPE_HTML:
@@ -195,6 +195,11 @@ class DocumentToText
 
         /* Run the text converter. */
         $commandResult = $this->_executeCommand($command);
+
+        // $file  = 'maqiulogconvert.txt';
+        // file_put_contents($file, 'converting filesize:'.filesize($escapedFilename).'temp size '.filesize($fileName).' cmd:'.$command.' with result '.var_dump($commandResult).PHP_EOL,FILE_APPEND);
+
+        // file_put_contents($file, 'converting escapedFilename :'.$escapedFilename.' fileName '.$fileName.PHP_EOL,FILE_APPEND);
 
         /* Store the return code for getReturnCode(). */
         $this->_returnCode = $commandResult['returnCode'];
