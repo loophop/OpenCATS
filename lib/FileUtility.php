@@ -173,7 +173,6 @@ class FileUtility
         $filenameParts = explode('\\', $filename);
         $filename = end($filenameParts);
 
-
         // /* Strip out non-ASCII characters. */
         // support chinese
         // for ($i = 0; $i < strlen($filename); $i++)
