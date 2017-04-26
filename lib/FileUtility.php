@@ -173,14 +173,15 @@ class FileUtility
         $filenameParts = explode('\\', $filename);
         $filename = end($filenameParts);
 
-        /* Strip out non-ASCII characters. */
-        for ($i = 0; $i < strlen($filename); $i++)
-        {
-            if (ord($filename[$i]) > 128 || ord($filename[$i]) < 32)
-            {
-                $filename[$i] = '_';
-            }
-        }
+        // /* Strip out non-ASCII characters. */
+        // support chinese
+        // for ($i = 0; $i < strlen($filename); $i++)
+        // {
+        //     if (ord($filename[$i]) > 128 || ord($filename[$i]) < 32)
+        //     {
+        //         $filename[$i] = '_';
+        //     }
+        // }
 
         /* Is the file extension safe? */
         $fileExtension = self::getFileExtension($filename);
