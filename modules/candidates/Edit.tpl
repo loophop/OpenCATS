@@ -371,10 +371,13 @@
 
                     <tr>
                         <td class="tdVertical">
-                            <label id="keySkillsLabel" for="keySkills">Key Skills:</label>
+                            <label id="keySkillsLabel" for="keySkills">关键技能:</label>
                         </td>
                         <td class="tdData">
                             <input type="text" class="inputbox" id="keySkills" name="keySkills" value="<?php $this->_($this->data['keySkills']); ?>" style="width: 400px;" />
+                        </td>
+                        <td class="tdComment">
+                            <label for="keySkills">逗号隔开</label>
                         </td>
                     </tr>
 

@@ -733,6 +733,16 @@ td.tdData
     vertical-align: top;
 }
 
+
+td.tdComment
+{
+    font: normal normal normal 12px Arial, Tahoma, sans-serif;
+    color: #000;
+    text-align: left;
+    vertical-align: top;
+    width: 120px;
+}
+
 p.freeformtop
 {
     margin: 0px;

@@ -489,10 +489,13 @@
 
                     <tr>
                         <td class="tdVertical">
-                            <label id="keySkillsLabel" for="keySkills">Key Skills:</label>
+                            <label id="keySkillsLabel" for="keySkills">关键技能:</label>
                         </td>
                         <td class="tdData">
                             <input type="text" class="inputbox" tabindex="<?php echo($tabIndex++); ?>" name="keySkills" id="keySkills" style="width: 400px;" value="<?php if (isset($this->preassignedFields['keySkills'])) $this->_($this->preassignedFields['keySkills']); ?>" />
+                        </td>
+                        <td class="tdComment">
+                            <label for="keySkills">逗号隔开</label>
                         </td>
                     </tr>
 
