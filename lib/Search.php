@@ -63,6 +63,9 @@ class SearchUtility
         /* Make a copy of the keywords array for manupulating below. */
         $workingKeys = $keywords;
 
+        // $file  = 'maqiulog.txt';
+        // file_put_contents($file, 'searching on keys '.$workingKeys.PHP_EOL,FILE_APPEND);
+
         /* Extract a fragment per keyword, for at most 4 keywords.
          * First we collect ranges of text around each keyword, starting/ending
          * at spaces. If the sum of all fragments is too short, we look for
@@ -97,6 +100,10 @@ class SearchUtility
                 if (strpos($key, '*') !== false)
                 {
                     $newKey = str_replace('\*', '', $key);
+
+        // $file  = 'maqiulog.txt';
+        // file_put_contents($file, 'searching '.$newKey.'on text'.$text.PHP_EOL,FILE_APPEND);
+
                     $regExPass = preg_match(
                         '/' . $newKey . '/i', $text, $matches,
                         PREG_OFFSET_CAPTURE, $included[$key]
@@ -104,6 +111,9 @@ class SearchUtility
                 }
                 else
                 {
+        // $file  = 'maqiulog.txt';
+        // file_put_contents($file, 'searching '.$key.'on text'.$text.PHP_EOL,FILE_APPEND);
+
                     $regExPass = preg_match(
                         '/\b' . $key . '\b/i', $text, $matches,
                         PREG_OFFSET_CAPTURE, $included[$key]
@@ -2010,6 +2020,9 @@ class SearchByResumePager extends Pager
             $this->_thisPageStartRow,
             $this->_rowsPerPage
         );
+
+        // $file  = 'maqiulog.txt';
+        // file_put_contents($file, 'search.getPage sql '.$sql.PHP_EOL,FILE_APPEND);
 
         return $this->_db->getAllAssoc($sql);
     }
