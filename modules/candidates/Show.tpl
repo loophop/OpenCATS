@@ -16,7 +16,7 @@
                     <td width="3%">
                         <img src="images/candidate.gif" width="24" height="24" border="0" alt="Candidates" style="margin-top: 3px;" />&nbsp;
                     </td>
-                    <td><h2>Candidates:中文测试 Candidate Details</h2></td>
+                    <td><h2>Candidates:Candidate Details</h2></td>
                </tr>
             </table>
 
@@ -342,8 +342,10 @@
                             <?php endif; ?>
                             <tr>
                                 <td valign="top" class="vertical">简历预览:</td>
-                                <td id="firstTextAttach" style="display:block;" class="data">
+                                <td id="firstTextAttach" style="display:block; width: 800px" class="data">
+                                    <pre style="font-size: 12px; padding: 5px;white-space: pre-wrap;word-wrap: break-word;">
                                     <?php echo($this->firstTextAttach['text']); ?>&nbsp;
+                                    </pre>
                                 </td>
                             </tr>
 
