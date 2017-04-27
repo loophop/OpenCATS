@@ -343,7 +343,7 @@
                             <tr>
                                 <td valign="top" class="vertical">简历预览:</td>
                                 <td id="firstTextAttach" style="display:block;" class="data">
-                                    <?php echo($this->firstTextAttach); ?>&nbsp;
+                                    <?php echo($this->firstTextAttach['text']); ?>&nbsp;
                                 </td>
                             </tr>
 
