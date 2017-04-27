@@ -341,15 +341,6 @@
                             </tr>
                             <?php endif; ?>
                             <tr>
-                                <td valign="top" class="vertical">简历预览:</td>
-                                <td id="firstTextAttach" style="display:block; width: 800px" class="data">
-                                    <pre style="font-size: 12px; padding: 5px;white-space: pre-wrap;word-wrap: break-word;">
-                                    <?php echo($this->firstTextAttach['text']); ?>&nbsp;
-                                    </pre>
-                                </td>
-                            </tr>
-
-                            <tr>
                                 <td valign="top" class="vertical">Attachments:</td>
                                 <td valign="top" class="data">
                                     <table class="attachmentsTable">
@@ -403,6 +394,14 @@
 
                                 </td>
                                 <td valign="top" class="data"><?= implode(', ',$this->assignedTags) ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td valign="top" class="vertical">简历预览:</td>
+                                <td id="firstTextAttach" style="display:block; width: 800px" class="data">
+                                    <pre style="font-size: 12px; padding: 5px;white-space: pre-wrap;word-wrap: break-word;">
+                                    <?php echo($this->firstTextAttach['text']); ?>&nbsp;
+                                    </pre>
                                 </td>
                             </tr>
                         </table>
