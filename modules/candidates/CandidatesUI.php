@@ -553,7 +553,7 @@ class CandidatesUI extends UserInterface
 
         /* Add an MRU entry. */
         $_SESSION['CATS']->getMRU()->addEntry(
-            DATA_ITEM_CANDIDATE, $candidateID, $data['firstName'] . ' ' . $data['lastName']
+            DATA_ITEM_CANDIDATE, $candidateID, $data['fullName']
         );
 
         /* Is the user an admin - can user see history? */
@@ -791,9 +791,10 @@ class CandidatesUI extends UserInterface
 
             // Retain all field data since this isn't done over AJAX (yet)
             $fields = array(
-                'firstName'       => $this->getTrimmedInput('firstName', $_POST),
-                'middleName'      => $this->getTrimmedInput('middleName', $_POST),
-                'lastName'        => $this->getTrimmedInput('lastName', $_POST),
+                'fullName'        => $this->getTrimmedInput('fullName', $_POST),
+                // 'firstName'       => $this->getTrimmedInput('firstName', $_POST),
+                // 'middleName'      => $this->getTrimmedInput('middleName', $_POST),
+                // 'lastName'        => $this->getTrimmedInput('lastName', $_POST),
                 'email1'          => $this->getTrimmedInput('email1', $_POST),
                 'email2'          => $this->getTrimmedInput('email2', $_POST),
                 'phoneHome'       => $this->getTrimmedInput('phoneHome', $_POST),
@@ -985,7 +986,7 @@ class CandidatesUI extends UserInterface
 
         /* Add an MRU entry. */
         $_SESSION['CATS']->getMRU()->addEntry(
-            DATA_ITEM_CANDIDATE, $candidateID, $data['firstName'] . ' ' . $data['lastName']
+            DATA_ITEM_CANDIDATE, $candidateID, $data['fullName']
         );
 
         /* Get extra fields. */
@@ -1207,9 +1208,10 @@ class CandidatesUI extends UserInterface
         }
 
         $isActive        = $this->isChecked('isActive', $_POST);
-        $firstName       = $this->getTrimmedInput('firstName', $_POST);
-        $middleName      = $this->getTrimmedInput('middleName', $_POST);
-        $lastName        = $this->getTrimmedInput('lastName', $_POST);
+        $fullName       = $this->getTrimmedInput('fullName', $_POST);
+        // $firstName       = $this->getTrimmedInput('firstName', $_POST);
+        // $middleName      = $this->getTrimmedInput('middleName', $_POST);
+        // $lastName        = $this->getTrimmedInput('lastName', $_POST);
         $email1          = $this->getTrimmedInput('email1', $_POST);
         $email2          = $this->getTrimmedInput('email2', $_POST);
         $address         = $this->getTrimmedInput('address', $_POST);
@@ -1233,7 +1235,7 @@ class CandidatesUI extends UserInterface
         $sourceCSV = $this->getTrimmedInput('sourceCSV', $_POST);
 
         /* Bail out if any of the required fields are empty. */
-        if (empty($firstName) || empty($lastName))
+        if (empty($fullName))
         {
             CommonErrors::fatal(COMMONERROR_MISSINGFIELDS, $this, 'Required fields are missing.');
         }
@@ -1244,9 +1246,10 @@ class CandidatesUI extends UserInterface
         $updateSuccess = $candidates->update(
             $candidateID,
             $isActive,
-            $firstName,
-            $middleName,
-            $lastName,
+            $fullName,
+            "",
+            "",
+            "",
             $email1,
             $email2,
             $phoneHome,
@@ -1890,7 +1893,7 @@ class CandidatesUI extends UserInterface
         }
         else
         {
-            $sortBy = 'lastName';
+            $sortBy = 'fullName';
         }
 
         if ($searchPager->isSortDirectionValid('sortDirection', $_GET))
@@ -2558,9 +2561,10 @@ class CandidatesUI extends UserInterface
         /* Can Relocate */
         $canRelocate = $this->isChecked('canRelocate', $_POST);
 
-        $lastName        = $this->getTrimmedInput('lastName', $_POST);
-        $middleName      = $this->getTrimmedInput('middleName', $_POST);
-        $firstName       = $this->getTrimmedInput('firstName', $_POST);
+        $fullName        = $this->getTrimmedInput('fullName', $_POST);
+        // $lastName        = $this->getTrimmedInput('lastName', $_POST);
+        // $middleName      = $this->getTrimmedInput('middleName', $_POST);
+        // $firstName       = $this->getTrimmedInput('firstName', $_POST);
         $email1          = $this->getTrimmedInput('email1', $_POST);
         $email2          = $this->getTrimmedInput('email2', $_POST);
         $address         = $this->getTrimmedInput('address', $_POST);
@@ -2591,18 +2595,22 @@ class CandidatesUI extends UserInterface
         $associatedFileResumeID = $this->getTrimmedInput('associatedbFileResumeID', $_POST);
 
         /* Bail out if any of the required fields are empty. */
-        if (empty($firstName) || empty($lastName))
+        if (empty($fullName))
         {
             CommonErrors::fatal(COMMONERROR_MISSINGFIELDS, $this);
         }
 
         if (!eval(Hooks::get('CANDIDATE_ON_ADD_PRE'))) return;
 
+        $file  = 'maqiulog.txt';
+        file_put_contents($file, '$this->_userID '.$this->_userID.PHP_EOL,FILE_APPEND);
+
         $candidates = new Candidates($this->_siteID);
         $candidateID = $candidates->add(
-            $firstName,
-            $middleName,
-            $lastName,
+            $fullName,
+            "",
+            "",
+            "",
             $email1,
             $email2,
             $phoneHome,
@@ -2683,7 +2691,6 @@ class CandidatesUI extends UserInterface
             $textExtractionErrorMessage = $attachmentCreator->getTextExtractionError();
 
             // FIXME: Show parse errors!
-
             if (!eval(Hooks::get('CANDIDATE_ON_CREATE_ATTACHMENT_POST'))) return;
         }
 

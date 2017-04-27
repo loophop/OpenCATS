@@ -34,27 +34,36 @@
                     
                     <tr>
                         <td class="tdVertical">
-                            <label id="firstNameLabel" for="firstName">First Name:</label>
+                            <label id="fullNameLabel" for="fullName">姓名:</label>
                         </td>
                         <td class="tdData">
+                            <input type="text" class="inputbox" id="fullName" name="fullName" value="<?php $this->_($this->data['fullName']); ?>" style="width: 150px;" />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="tdVertical" style="display: none;">
+                            <label id="firstNameLabel" for="firstName">First Name:</label>
+                        </td>
+                        <td class="tdData" style="display: none;">
                             <input type="text" class="inputbox" id="firstName" name="firstName" value="<?php $this->_($this->data['firstName']); ?>" style="width: 150px;" />
                         </td>
                     </tr>
 
                     <tr>
-                        <td class="tdVertical">
+                        <td class="tdVertical" style="display: none;">
                             <label id="middleNameLabel" for="middleName">Middle Name:</label>
                         </td>
-                        <td class="tdData">
+                        <td class="tdData" style="display: none;">
                             <input type="text" class="inputbox" id="middleName" name="middleName" value="<?php $this->_($this->data['middleName']); ?>" style="width: 150px;" />
                         </td>
                     </tr>
 
                     <tr>
-                        <td class="tdVertical">
+                        <td class="tdVertical" style="display: none;">
                             <label id="lastNameLabel" for="lastName">Last Name:</label>
                         </td>
-                        <td class="tdData">
+                        <td class="tdData" style="display: none;">
                             <input type="text" class="inputbox" id="lastName" name="lastName" value="<?php $this->_($this->data['lastName']); ?>" style="width: 150px;" />
                         </td>
                     </tr>
@@ -196,7 +205,7 @@
 
                     <tr>
                         <td class="tdVertical">
-                            <label id="ownerLabel" for="owner">Owner:</label>
+                            <label id="ownerLabel" for="owner">创建HR:</label>
                         </td>
                         <td class="tdData">
                             <select id="owner" name="owner" class="inputbox" style="width: 150px;" <?php if (!$this->emailTemplateDisabled): ?>onchange="document.getElementById('divOwnershipChange').style.display=''; <?php if ($this->canEmail): ?>document.getElementById('checkboxOwnershipChange').checked=true;<?php endif; ?>"<?php endif; ?>>
@@ -204,9 +213,9 @@
 
                                 <?php foreach ($this->usersRS as $rowNumber => $usersData): ?>
                                     <?php if ($this->data['owner'] == $usersData['userID']): ?>
-                                        <option selected="selected" value="<?php $this->_($usersData['userID']) ?>"><?php $this->_($usersData['lastName']) ?>, <?php $this->_($usersData['firstName']) ?></option>
+                                        <option selected="selected" value="<?php $this->_($usersData['userID']) ?>"><?php $this->_($usersData['fullName']) ?></option>
                                     <?php else: ?>
-                                        <option value="<?php $this->_($usersData['userID']) ?>"><?php $this->_($usersData['lastName']) ?>, <?php $this->_($usersData['firstName']) ?></option>
+                                        <option value="<?php $this->_($usersData['userID']) ?>"><?php $this->_($usersData['fullName']) ?></option>
                                     <?php endif; ?>
                                 <?php endforeach; ?>
                             </select>&nbsp;*
@@ -344,7 +353,7 @@
 
                     <tr>
                         <td class="tdVertical">
-                            <label id="currentEmployerLabel" for="currentEmployer">Current Employer:</label>
+                            <label id="currentEmployerLabel" for="currentEmployer">最近公司:</label>
                         </td>
                         <td class="tdData">
                             <input type="text" class="inputbox" id="currentEmployer" name="currentEmployer" value="<?php $this->_($this->data['currentEmployer']); ?>" style="width: 150px;" />
@@ -377,7 +386,7 @@
                             <input type="text" class="inputbox" id="keySkills" name="keySkills" value="<?php $this->_($this->data['keySkills']); ?>" style="width: 400px;" />
                         </td>
                         <td class="tdComment">
-                            <label for="keySkills">逗号隔开</label>
+                            <label for="keySkills">空格隔开</label>
                         </td>
                     </tr>
 
@@ -396,7 +405,7 @@
             </form>
 
             <script type="text/javascript">
-                document.editCandidateForm.firstName.focus();
+                document.editCandidateForm.fullName.focus();
             </script>
         </div>
     </div>

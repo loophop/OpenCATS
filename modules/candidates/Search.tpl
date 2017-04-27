@@ -60,11 +60,14 @@
                     <thead>
                         <tr>
                             <th nowrap>&nbsp;</th>
-                            <th align="left" nowrap="nowrap">
+<!--                             <th align="left" nowrap="nowrap">
                                 <?php $this->pager->printSortLink('firstName', 'First Name'); ?>
                             </th>
                             <th align="left" nowrap="nowrap">
                                 <?php $this->pager->printSortLink('lastName', 'Last Name'); ?>
+                            </th> -->
+                            <th align="left" nowrap="nowrap">
+                                <?php $this->pager->printSortLink('fullName', '姓名'); ?>
                             </th>
                             <th align="left" nowrap="nowrap">Resume</th>
                             <th align="left" nowrap="nowrap">
@@ -95,7 +98,7 @@
                                             <img src="images/new_window.gif" class="abstop" alt="(Preview)" border="0" width="15" height="15" />
                                         </a>
                                     </td>
-                                    <td valign="top">
+<!--                                     <td valign="top">
                                         <a href="<?php echo(CATSUtility::getIndexName()); ?>?m=candidates&amp;a=show&amp;candidateID=<?php $this->_($data['candidateID']); ?>">
                                             <?php $this->_($data['firstName']); ?>
                                         </a>
@@ -103,6 +106,11 @@
                                     <td valign="top">
                                         <a href="<?php echo(CATSUtility::getIndexName()); ?>?m=candidates&amp;a=show&amp;candidateID=<?php $this->_($data['candidateID']); ?>">
                                             <?php $this->_($data['lastName']); ?>
+                                        </a>
+                                    </td> -->
+                                    <td valign="top">
+                                        <a href="<?php echo(CATSUtility::getIndexName()); ?>?m=candidates&amp;a=show&amp;candidateID=<?php $this->_($data['candidateID']); ?>">
+                                            <?php $this->_($data['fullName']); ?>
                                         </a>
                                     </td>
                                 <?php else: ?>
@@ -150,13 +158,16 @@
                     <table class="sortable" width="100%" onmouseover="javascript:trackTableHighlight(event)">
                         <tr>
                             <th nowrap>&nbsp;</th>
-                            <th align="left" nowrap="nowrap">
+<!--                             <th align="left" nowrap="nowrap">
                                 <?php $this->pager->printSortLink('firstName', 'First Name'); ?>
                             </th>
                             <th align="left" nowrap="nowrap">
                                 <?php $this->pager->printSortLink('lastName', 'Last Name'); ?>
+                            </th> -->
+                            <th align="left" nowrap="nowrap">
+                                <?php $this->pager->printSortLink('fullName', '姓名'); ?>
                             </th>
-                            <th align="left" nowrap="nowrap">Key Skills</th>
+                            <th align="left" nowrap="nowrap">关键技能</th>
                             <th align="left" nowrap="nowrap">
                                 <?php $this->pager->printSortLink('city', 'City'); ?>
                             </th>
@@ -182,7 +193,7 @@
                                         <img src="images/new_window.gif" class="abstop" alt="(Preview)" border="0" width="15" height="15" />
                                     </a>&nbsp;
                                 </td>
-                                <td>
+<!--                                 <td>
                                     <a href="<?php echo(CATSUtility::getIndexName()); ?>?m=candidates&amp;a=show&amp;candidateID=<?php $this->_($data['candidateID']); ?>">
                                         <?php $this->_($data['firstName']); ?>
                                     </a>
@@ -190,6 +201,11 @@
                                 <td>
                                     <a href="<?php echo(CATSUtility::getIndexName()); ?>?m=candidates&amp;a=show&amp;candidateID=<?php $this->_($data['candidateID']); ?>">
                                         <?php $this->_($data['lastName']); ?>
+                                    </a>
+                                </td> -->
+                                <td>
+                                    <a href="<?php echo(CATSUtility::getIndexName()); ?>?m=candidates&amp;a=show&amp;candidateID=<?php $this->_($data['candidateID']); ?>">
+                                        <?php $this->_($data['fullName']); ?>
                                     </a>
                                 </td>
                                 <td>

@@ -61,6 +61,7 @@ class Candidates
     /**
      * Adds a candidate to the database and returns its candidate ID.
      *
+     * @param string Full name.
      * @param string First name.
      * @param string Middle name / initial.
      * @param string Last name.
@@ -91,7 +92,7 @@ class Candidates
      * @param boolean Skip creating a history entry?
      * @return integer Candidate ID of new candidate, or -1 on failure.
      */
-    public function add($firstName, $middleName, $lastName, $email1, $email2,
+    public function add($fullName, $firstName, $middleName, $lastName, $email1, $email2,
         $phoneHome, $phoneCell, $phoneWork, $address, $city, $state, $zip,
         $source, $keySkills, $dateAvailable, $currentEmployer, $canRelocate,
         $currentPay, $desiredPay, $notes, $webSite, $bestTimeToCall, $enteredBy, $owner,
@@ -100,6 +101,7 @@ class Candidates
     {
         $sql = sprintf(
             "INSERT INTO candidate (
+                full_name,
                 first_name,
                 middle_name,
                 last_name,
@@ -157,6 +159,7 @@ class Candidates
                 %s,
                 %s,
                 %s,
+                %s,
                 0,
                 %s,
                 %s,
@@ -167,6 +170,7 @@ class Candidates
                 %s,
                 %s
             )",
+            $this->_db->makeQueryString($fullName),
             $this->_db->makeQueryString($firstName),
             $this->_db->makeQueryString($middleName),
             $this->_db->makeQueryString($lastName),
@@ -218,6 +222,7 @@ class Candidates
      * Updates a candidate.
      *
      * @param integer Candidate ID to update.
+     * @param string Full name.
      * @param string First name.
      * @param string Middle name / initial.
      * @param string Last name.
@@ -246,7 +251,7 @@ class Candidates
      * @param string EEO disability status, or '' to not specify.
      * @return boolean True if successful; false otherwise.
      */
-    public function update($candidateID, $isActive, $firstName, $middleName, $lastName,
+    public function update($candidateID, $isActive, $fullName, $firstName, $middleName, $lastName,
         $email1, $email2, $phoneHome, $phoneCell, $phoneWork, $address,
         $city, $state, $zip, $source, $keySkills, $dateAvailable,
         $currentEmployer, $canRelocate, $currentPay, $desiredPay,
@@ -258,6 +263,7 @@ class Candidates
                 candidate
             SET
                 is_active             = %s,
+                full_name             = %s,
                 first_name            = %s,
                 middle_name           = %s,
                 last_name             = %s,
@@ -292,6 +298,7 @@ class Candidates
             AND
                 site_id = %s",
             ($isActive ? '1' : '0'),
+            $this->_db->makeQueryString($fullName),
             $this->_db->makeQueryString($firstName),
             $this->_db->makeQueryString($middleName),
             $this->_db->makeQueryString($lastName),
@@ -448,6 +455,7 @@ class Candidates
             "SELECT
                 candidate.candidate_id AS candidateID,
                 candidate.is_active AS isActive,
+                candidate.full_name AS fullName,
                 candidate.first_name AS firstName,
                 candidate.middle_name AS middleName,
                 candidate.last_name AS lastName,
@@ -558,6 +566,7 @@ class Candidates
             "SELECT
                 candidate.candidate_id AS candidateID,
                 candidate.is_active AS isActive,
+                candidate.full_name AS fullName,
                 candidate.first_name AS firstName,
                 candidate.middle_name AS middleName,
                 candidate.last_name AS lastName,

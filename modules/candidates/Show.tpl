@@ -1,8 +1,8 @@
 <?php /* $Id: Show.tpl 3814 2007-12-06 17:54:28Z brian $ */ ?>
 <?php if ($this->isPopup): ?>
-    <?php TemplateUtility::printHeader('Candidate - '.$this->data['firstName'].' '.$this->data['lastName'], array( 'js/activity.js', 'js/sorttable.js', 'js/match.js', 'js/lib.js', 'js/pipeline.js', 'js/attachment.js')); ?>
+    <?php TemplateUtility::printHeader('Candidate - '.$this->data['fullName'], array( 'js/activity.js', 'js/sorttable.js', 'js/match.js', 'js/lib.js', 'js/pipeline.js', 'js/attachment.js')); ?>
 <?php else: ?>
-    <?php TemplateUtility::printHeader('Candidate - '.$this->data['firstName'].' '.$this->data['lastName'], array( 'js/activity.js', 'js/sorttable.js', 'js/match.js', 'js/lib.js', 'js/pipeline.js', 'js/attachment.js')); ?>
+    <?php TemplateUtility::printHeader('Candidate - '.$this->data['fullName'], array( 'js/activity.js', 'js/sorttable.js', 'js/match.js', 'js/lib.js', 'js/pipeline.js', 'js/attachment.js')); ?>
     
     <?php TemplateUtility::printHeaderBlock(); ?>
     <?php TemplateUtility::printTabs($this->active); ?>
@@ -41,12 +41,10 @@
                     <?php endif; ?>
                         <table class="detailsInside" height="100%">
                             <tr>
-                                <td class="vertical">Name:</td>
+                                <td class="vertical">姓名:</td>
                                 <td class="data">
                                     <span style="font-weight: bold;" class="<?php echo($this->data['titleClass']); ?>">
-                                        <?php $this->_($this->data['firstName']); ?>
-                                        <?php $this->_($this->data['middleName']); ?>
-                                        <?php $this->_($this->data['lastName']); ?>
+                                        <?php $this->_($this->data['fullName']); ?>
                                         <?php if ($this->data['isActive'] != 1): ?>
                                             &nbsp;<span style="color:orange;">(INACTIVE)</span>
                                         <?php endif; ?>
@@ -145,7 +143,7 @@
                             </tr>
 
                             <tr>
-                                <td class="vertical">Current Employer:</td>
+                                <td class="vertical">最近公司:</td>
                                 <td class="data"><?php $this->_($this->data['currentEmployer']); ?></td>
                             </tr>
 
@@ -185,7 +183,7 @@
                             </tr>
 
                             <tr>
-                                <td class="vertical">Owner:</td>
+                                <td class="vertical">创建HR:</td>
                                 <td class="data"><?php $this->_($this->data['ownerFullName']); ?></td>
                             </tr>
 
@@ -272,23 +270,6 @@
                 <tr>
                     <td>
                         <table class="detailsInside">
-                            <tr>
-                                <td valign="top" class="vertical">Misc. Notes:</td>
-                                <?php if ($this->isShortNotes): ?>
-                                    <td id="shortNotes" style="display:block;" class="data">
-                                        <?php echo($this->data['shortNotes']); ?><span class="moreText">...</span>&nbsp;
-                                        <p><a href="#" class="moreText" onclick="toggleNotes(); return false;">[More]</a></p>
-                                    </td>
-                                    <td id="fullNotes" style="display:none;" class="data">
-                                        <?php echo($this->data['notes']); ?>&nbsp;
-                                        <p><a href="#" class="moreText" onclick="toggleNotes(); return false;">[Less]</a></p>
-                                    </td>
-                                <?php else: ?>
-                                    <td id="shortNotes" style="display:block;" class="data">
-                                        <?php echo($this->data['notes']); ?>
-                                    </td>
-                                <?php endif; ?>
-                            </tr>
 
                             <tr>
                                 <td valign="top" class="vertical">Upcoming Events:</td>
@@ -341,7 +322,7 @@
                             </tr>
                             <?php endif; ?>
                             <tr>
-                                <td valign="top" class="vertical">Attachments:</td>
+                                <td valign="top" class="vertical">附件:</td>
                                 <td valign="top" class="data">
                                     <table class="attachmentsTable">
                                         <?php foreach ($this->attachmentsRS as $rowNumber => $attachmentsData): ?>
@@ -403,6 +384,23 @@
                                     <?php echo($this->firstTextAttach['text']); ?>&nbsp;
                                     </pre>
                                 </td>
+                            </tr>
+                            <tr>
+                                <td valign="top" class="vertical">备注:</td>
+                                <?php if ($this->isShortNotes): ?>
+                                    <td id="shortNotes" style="display:block;" class="data">
+                                        <?php echo($this->data['shortNotes']); ?><span class="moreText">...</span>&nbsp;
+                                        <p><a href="#" class="moreText" onclick="toggleNotes(); return false;">[More]</a></p>
+                                    </td>
+                                    <td id="fullNotes" style="display:none;" class="data">
+                                        <?php echo($this->data['notes']); ?>&nbsp;
+                                        <p><a href="#" class="moreText" onclick="toggleNotes(); return false;">[Less]</a></p>
+                                    </td>
+                                <?php else: ?>
+                                    <td id="shortNotes" style="display:block;" class="data">
+                                        <?php echo($this->data['notes']); ?>
+                                    </td>
+                                <?php endif; ?>
                             </tr>
                         </table>
                     </td>

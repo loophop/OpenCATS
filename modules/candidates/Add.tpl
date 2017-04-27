@@ -69,11 +69,12 @@
                     <?php endif; ?>
                     <tr>
                         <td class="tdVertical">
-                            <label id="firstNameLabel" for="firstName">First Name:</label>
+                            <label id="fullNameLabel" for="fullName">姓名:</label>
                         </td>
                         <td class="tdData">
-                            <input type="text" tabindex="1" name="firstName" id="firstName" class="inputbox" style="width: 150px" value="<?php if(isset($this->preassignedFields['firstName'])) $this->_($this->preassignedFields['firstName']); ?>" />&nbsp;*
+                            <input type="text" tabindex="1" name="fullName" id="fullName" class="inputbox" style="width: 150px" value="<?php if(isset($this->preassignedFields['fullName'])) $this->_($this->preassignedFields['fullName']); ?>" />&nbsp;*
                         </td>
+
 
                         <td rowspan="12" align="center" valign="top">
                             <?php if ($this->isParsingEnabled): ?>
@@ -151,19 +152,29 @@
                     </tr>
 
                     <tr>
+                        <td class="tdVertical" style="display: none;">
+                            <label id="firstNameLabel" for="firstName">First Name:</label>
+                        </td>
+                        <td class="tdData" style="display: none;">
+                            <input type="text" tabindex="1" name="firstName" id="firstName" class="inputbox" style="width: 150px" value="<?php if(isset($this->preassignedFields['firstName'])) $this->_($this->preassignedFields['firstName']); ?>" />&nbsp;*
+                        </td>
+
+                    </tr>
+
+<!--                     <tr>
                         <td class="tdVertical">
                             <label id="middleNameLabel" for="middleName">Middle Name:</label>
                         </td>
                         <td class="tdData">
                             <input type="text" tabindex="2" name="middleName" id="middleName" class="inputbox" style="width: 150px" value="<?php if(isset($this->preassignedFields['middleName'])) $this->_($this->preassignedFields['middleName']); ?>" />
                         </td>
-                    </tr>
+                    </tr> -->
 
                     <tr>
-                        <td class="tdVertical">
+                        <td class="tdVertical" style="display: none;">
                             <label id="lastNameLabel" for="lastName">Last Name:</label>
                         </td>
-                        <td class="tdData">
+                        <td class="tdData" style="display: none;">
                             <input type="text" tabindex="2" name="lastName" id="lastName" class="inputbox" style="width: 150px" value="<?php if(isset($this->preassignedFields['lastName'])) $this->_($this->preassignedFields['lastName']); ?>" />&nbsp;*
                         </td>
                     </tr>
@@ -209,7 +220,7 @@
                                     <img id="transfer" src="images/parser/transfer<?php echo ($this->contents != '' ? '' : '_grey'); ?>.gif" <?php echo ($this->contents != '' ? 'style="cursor: pointer;"' : ''); ?> border="0" alt="Import Resume" onclick="parseDocumentFileContents();" />
                                 <?php endif; ?>
                             <?php else: ?>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="arrowButton" tabindex="91" align="middle" type="button" value="&lt;--" class="arrowbutton" onclick="AddressParser_parse('addressBlock', 'person', 'addressParserIndicator', 'arrowButton'); document.addCandidateForm.firstName.focus();" />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="arrowButton" tabindex="91" align="middle" type="button" value="&lt;--" class="arrowbutton" onclick="AddressParser_parse('addressBlock', 'person', 'addressParserIndicator', 'arrowButton'); document.addCandidateForm.fullName.focus();" />
                             <?php endif; ?>
                         </td>
                     </tr>
@@ -438,7 +449,7 @@
 
                     <tr>
                         <td class="tdVertical">
-                            <label id="currentEmployerLabel" for="currentEmployer">Current Employer:</label>
+                            <label id="currentEmployerLabel" for="currentEmployer">最近公司:</label>
                         </td>
                         <td class="tdData">
                             <input type="text" tabindex="<?php echo($tabIndex++); ?>" name="currentEmployer" id="currentEmployer" class="inputbox" style="width: 150px" value="<?php if (isset($this->preassignedFields['currentEmployer'])) $this->_($this->preassignedFields['currentEmployer']); ?>" />
@@ -495,13 +506,13 @@
                             <input type="text" class="inputbox" tabindex="<?php echo($tabIndex++); ?>" name="keySkills" id="keySkills" style="width: 400px;" value="<?php if (isset($this->preassignedFields['keySkills'])) $this->_($this->preassignedFields['keySkills']); ?>" />
                         </td>
                         <td class="tdComment">
-                            <label for="keySkills">逗号隔开</label>
+                            <label for="keySkills">空格隔开</label>
                         </td>
                     </tr>
 
                     <tr>
                         <td class="tdVertical">
-                            <label id="notesLabel" for="notes">Misc. Notes:</label>
+                            <label id="notesLabel" for="notes">备注:</label>
                         </td>
                         <td class="tdData">
                             <textarea class="inputbox" tabindex="<?php echo($tabIndex++); ?>" name="notes" id="notes" rows="5" cols="40" style="width: 400px;"><?php if (isset($this->preassignedFields['notes'])) $this->_($this->preassignedFields['notes']); ?></textarea>
@@ -519,7 +530,7 @@
             </form>
 
 <script type="text/javascript">
-    document.addCandidateForm.firstName.focus();
+    document.addCandidateForm.fullName.focus();
     <?php if(isset($this->preassignedFields['email']) || isset($this->preassignedFields['email1'])): ?>
         checkEmailAlreadyInSystem(urlDecode("<?php if(isset($this->preassignedFields['email'])) echo(urlencode($this->preassignedFields['email'])); else if(isset($this->preassignedFields['email1'])) echo(urlencode($this->preassignedFields['email1'])); ?>"));
     <?php endif; ?>

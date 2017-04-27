@@ -12,8 +12,9 @@ function checkAddForm(form)
 {
     var errorMessage = '';
 
-    errorMessage += checkFirstName();
-    errorMessage += checkLastName();
+    // errorMessage += checkFirstName();
+    // errorMessage += checkLastName();
+    errorMessage += checkFullName();
 
     if (errorMessage != '')
     {
@@ -28,9 +29,10 @@ function checkEditForm(form)
 {
     var errorMessage = '';
 
-    errorMessage += checkFirstName();
-    errorMessage += checkLastName();
-
+    // errorMessage += checkFirstName();
+    // errorMessage += checkLastName();
+    errorMessage += checkFullName();
+    
     if (errorMessage != '')
     {
         alert("Form Error:\n" + errorMessage);
@@ -130,6 +132,27 @@ function checkEmailForm(form)
 
     return true;
 }
+
+function checkFullName()
+{
+    var errorMessage = '';
+
+    fieldValue = document.getElementById('fullName').value;
+    fieldLabel = document.getElementById('fullNameLabel');
+    if (fieldValue == '')
+    {
+        errorMessage = "    - You must enter a full name.\n";
+
+        fieldLabel.style.color = '#ff0000';
+    }
+    else
+    {
+        fieldLabel.style.color = '#000';
+    }
+
+    return errorMessage;
+}
+
 
 function checkFirstName()
 {

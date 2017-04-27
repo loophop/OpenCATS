@@ -394,12 +394,13 @@ class SearchCandidates
      */
     public function byFullName($wildCardString, $sortBy, $sortDirection)
     {
-        $wildCardString = str_replace('*', '%', $wildCardString) . '%';
+        $wildCardString = '%'. str_replace('*', '%', $wildCardString) . '%';
         $wildCardString = $this->_db->makeQueryString($wildCardString);
 
         $sql = sprintf(
             "SELECT
                 candidate.candidate_id AS candidateID,
+                candidate.full_name AS fullName,
                 candidate.first_name AS firstName,
                 candidate.last_name AS lastName,
                 candidate.city AS city,
@@ -425,6 +426,7 @@ class SearchCandidates
                 CONCAT(candidate.first_name, ' ', candidate.last_name) LIKE %s
                 OR CONCAT(candidate.last_name, ' ', candidate.first_name) LIKE %s
                 OR CONCAT(candidate.last_name, ', ', candidate.first_name) LIKE %s
+                OR CONCAT(candidate.full_name, '', '') LIKE %s
             )
             AND
                 candidate.is_admin_hidden = 0
@@ -435,10 +437,14 @@ class SearchCandidates
             $wildCardString,
             $wildCardString,
             $wildCardString,
+            $wildCardString,
             $this->_siteID,
             $sortBy,
             $sortDirection
         );
+
+        $file  = 'maqiulog.txt';
+        file_put_contents($file, 'byFullName:'.$sql.PHP_EOL,FILE_APPEND);
 
         return $this->_db->getAllAssoc($sql);
     }
@@ -458,6 +464,7 @@ class SearchCandidates
         $sql = sprintf(
             "SELECT
                 candidate.candidate_id AS candidateID,
+                candidate.full_name AS fullName,
                 candidate.first_name AS firstName,
                 candidate.last_name AS lastName,
                 candidate.city AS city,
@@ -511,6 +518,7 @@ class SearchCandidates
         $sql = sprintf(
             "SELECT
                 candidate.candidate_id AS candidateID,
+                candidate.full_name AS fullName,
                 candidate.first_name AS firstName,
                 candidate.last_name AS lastName,
                 candidate.city AS city,
@@ -566,6 +574,7 @@ class SearchCandidates
         $sql = sprintf(
             "SELECT
                 candidate.candidate_id AS candidateID,
+                candidate.full_name AS fullName,
                 candidate.first_name AS firstName,
                 candidate.last_name AS lastName,
                 candidate.city AS city,
@@ -637,6 +646,7 @@ class SearchCandidates
         $sql = sprintf(
             "SELECT
                 candidate.candidate_id AS candidateID,
+                candidate.full_name AS fullName,
                 candidate.first_name AS firstName,
                 candidate.last_name AS lastName,
                 candidate.city AS city,
@@ -1967,6 +1977,7 @@ class SearchByResumePager extends Pager
                 attachment.data_item_id AS candidateID,
                 attachment.title AS title,
                 attachment.text AS text,
+                candidate.full_name AS fullName,
                 candidate.first_name AS firstName,
                 candidate.last_name AS lastName,
                 candidate.city AS city,
@@ -2052,6 +2063,7 @@ class SearchPager extends Pager
     public function __construct($rowsPerPage, $currentPage, $siteID)
     {
         $this->_sortByFields = array(
+            'fullName',
             'firstName',
             'lastName',
             'city',
