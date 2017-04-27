@@ -123,7 +123,7 @@
 
                     <tr>
                         <td class="tdVertical">
-                            <label id="cityLabel" for="city">City:</label>
+                            <label id="cityLabel" for="city">所在城市:</label>
                         </td>
                         <td class="tdData">
                             <input type="text" class="inputbox" id="city" name="city" value="<?php $this->_($this->data['city']); ?>" style="width: 150px;" />
@@ -171,7 +171,7 @@
                             
                     <tr>
                         <td class="tdVertical">
-                            <label id="sourceLabel" for="source">Source:</label>
+                            <label id="sourceLabel" for="source">渠道:</label>
                         </td>
                         <td class="tdData">
                             <select id="sourceSelect" name="source" class="inputbox" style="width: 150px;" onchange="if (this.value == 'edit') { listEditor('Sources', 'sourceSelect', 'sourceCSV', false, ''); this.value = '(none)'; } if (this.value == 'nullline') { this.value = '(none)'; }">

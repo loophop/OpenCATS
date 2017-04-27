@@ -93,7 +93,7 @@
                             </tr>
 
                             <tr>
-                                <td class="vertical">Address:</td>
+                                <td class="vertical">所在城市:</td>
                                 <td class="data"><?php echo(nl2br(htmlspecialchars($this->data['address']))); ?></td>
                             </tr>
 
@@ -115,7 +115,7 @@
                             </tr>
 
                             <tr>
-                                <td class="vertical">Source:</td>
+                                <td class="vertical">渠道:</td>
                                 <td class="data"><?php $this->_($this->data['source']); ?></td>
                             </tr>
 
@@ -398,7 +398,7 @@
                             </tr>
                             <tr>
                                 <td valign="top" class="vertical">简历预览:</td>
-                                <td id="firstTextAttach" style="display:block; width: 800px" class="data">
+                                <td valign="top" class="data" id="firstTextAttach" style="display:block; width: 800px" class="data">
                                     <pre style="font-size: 12px; padding: 5px;white-space: pre-wrap;word-wrap: break-word;">
                                     <?php echo($this->firstTextAttach['text']); ?>&nbsp;
                                     </pre>

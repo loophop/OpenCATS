@@ -244,7 +244,7 @@
 
                     <tr>
                         <td class="tdVertical">
-                            <label id="cityLabel" for="city">City:</label>
+                            <label id="cityLabel" for="city">所在城市:</label>
                         </td>
                         <td class="tdData">
                             <input type="text" tabindex="11" name="city" id="city" class="inputbox" style="width: 150px" value="<?php if(isset($this->preassignedFields['city'])) $this->_($this->preassignedFields['city']); ?>" />
@@ -465,7 +465,7 @@
 
                     <tr>
                         <td class="tdVertical">
-                            <label id="sourceLabel" for="sourceSelect">Source:</label>
+                            <label id="sourceLabel" for="sourceSelect">渠道:</label>
                         </td>
                         <td class="tdData">
 <?php if ($this->isModal): ?>
