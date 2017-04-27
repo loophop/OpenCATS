@@ -1,11 +1,8 @@
-<?php /* $Id: Show.tpl 3814 2007-12-06 17:54:28Z brian $ */
-include_once('./vendor/autoload.php');
-use OpenCATS\UI\CandidateQuickActionMenu;
-?>
+<?php /* $Id: Show.tpl 3814 2007-12-06 17:54:28Z brian $ */ ?>
 <?php if ($this->isPopup): ?>
-    <?php TemplateUtility::printHeader('Candidate - '.$this->data['firstName'].' '.$this->data['lastName'], array( 'js/activity.js', 'js/sorttable.js', 'js/match.js', 'js/lib.js', 'js/pipeline.js', 'js/attachment.js', 'modules/candidates/quickAction-candidates.js')); ?>
+    <?php TemplateUtility::printHeader('Candidate - '.$this->data['firstName'].' '.$this->data['lastName'], array( 'js/activity.js', 'js/sorttable.js', 'js/match.js', 'js/lib.js', 'js/pipeline.js', 'js/attachment.js')); ?>
 <?php else: ?>
-    <?php TemplateUtility::printHeader('Candidate - '.$this->data['firstName'].' '.$this->data['lastName'], array( 'js/activity.js', 'js/sorttable.js', 'js/match.js', 'js/lib.js', 'js/pipeline.js', 'js/attachment.js', 'modules/candidates/quickAction-candidates.js')); ?>
+    <?php TemplateUtility::printHeader('Candidate - '.$this->data['firstName'].' '.$this->data['lastName'], array( 'js/activity.js', 'js/sorttable.js', 'js/match.js', 'js/lib.js', 'js/pipeline.js', 'js/attachment.js')); ?>
     
     <?php TemplateUtility::printHeaderBlock(); ?>
     <?php TemplateUtility::printTabs($this->active); ?>
@@ -19,7 +16,7 @@ use OpenCATS\UI\CandidateQuickActionMenu;
                     <td width="3%">
                         <img src="images/candidate.gif" width="24" height="24" border="0" alt="Candidates" style="margin-top: 3px;" />&nbsp;
                     </td>
-                    <td><h2>Candidates: Candidate Details</h2></td>
+                    <td><h2>Candidates:中文测试 Candidate Details</h2></td>
                </tr>
             </table>
 
@@ -343,6 +340,12 @@ use OpenCATS\UI\CandidateQuickActionMenu;
                                 </td>
                             </tr>
                             <?php endif; ?>
+                            <tr>
+                                <td valign="top" class="vertical">简历预览:</td>
+                                <td id="firstTextAttach" style="display:block;" class="data">
+                                    <?php echo($this->firstTextAttach); ?>&nbsp;
+                                </td>
+                            </tr>
 
                             <tr>
                                 <td valign="top" class="vertical">Attachments:</td>

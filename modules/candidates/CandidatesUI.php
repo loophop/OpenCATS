@@ -509,6 +509,7 @@ class CandidatesUI extends UserInterface
             DATA_ITEM_CANDIDATE, $candidateID
         );
 
+        $firstTextAttachmentID = NULL;
         foreach ($attachmentsRS as $rowNumber => $attachmentsData)
         {
             /* If profile image is not local, force it to be local. */
@@ -529,6 +530,11 @@ class CandidatesUI extends UserInterface
             /* If the text field has any text, show a preview icon. */
             if ($attachmentsRS[$rowNumber]['hasText'])
             {
+                /* Record the first readable attachment for preview */
+                if (is_null($firstTextAttachmentID) == true) 
+                {
+                    $firstTextAttachmentID = $attachmentsData['attachmentID'];
+                }
                 $attachmentsRS[$rowNumber]['previewLink'] = sprintf(
                     '<a href="#" onclick="window.open(\'%s?m=candidates&amp;a=viewResume&amp;attachmentID=%s\', \'viewResume\', \'scrollbars=1,width=800,height=760\')"><img width="15" height="15" style="border: none;" src="images/search.gif" alt="(Preview)" /></a>',
                     CATSUtility::getIndexName(),
@@ -670,6 +676,14 @@ class CandidatesUI extends UserInterface
 
         $questionnaire = new Questionnaire($this->_siteID);
         $questionnaires = $questionnaire->getCandidateQuestionnaires($candidateID);
+
+        /* Load the attachment for preview */
+        if (is_null($firstTextAttachmentID) == false) {
+
+            $firstTextAttach = $candidates->getResume($firstTextAttachmentID);
+            $firstTextAttach['text'] = DatabaseSearch::fulltextDecode($firstTextAttach['text']);
+            $this->_template->assign('firstTextAttach', $firstTextAttach);
+        }
 
         $this->_template->assign('active', $this);
         $this->_template->assign('questionnaires', $questionnaires);
