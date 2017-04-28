@@ -20,17 +20,15 @@ class candidatesListByViewDataGrid extends CandidatesDataGrid
 
         $this->defaultSortBy = 'dateModifiedSort';
         $this->defaultSortDirection = 'DESC';
+        /* for debuging */
+        $this->ignoreSavedColumnLayouts = true;
 
         $this->_defaultColumns = array(
             array('name' => 'Attachments', 'width' => 31),
-            array('name' => 'First Name', 'width' => 75),
-            array('name' => 'Last Name', 'width' => 85),
-            array('name' => 'City', 'width' => 75),
-            array('name' => 'State', 'width' => 50),
-            array('name' => 'Key Skills', 'width' => 215),
-            array('name' => 'Owner', 'width' => 65),
-            array('name' => 'Created', 'width' => 60),
-            array('name' => 'Modified', 'width' => 60),
+            array('name' => '姓名', 'width' => 85),
+            array('name' => '所在城市', 'width' => 75),
+            array('name' => '关键技能', 'width' => 215),
+            array('name' => '招聘HR', 'width' => 65),
         );
 
          parent::__construct("candidates:candidatesListByViewDataGrid",

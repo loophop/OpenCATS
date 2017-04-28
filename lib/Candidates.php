@@ -1164,6 +1164,13 @@ class CandidatesDataGrid extends DataGrid
                                       'pagerOptional'  => false,
                                       'alphaNavigation'=> true,
                                       'filter'         => 'candidate.first_name'),
+            '姓名' =>     array('select'         => 'candidate.full_name AS fullName',
+                                      'pagerRender'    => 'if ($rsData[\'isHot\'] == 1) $className =  \'jobLinkHot\'; else $className = \'jobLinkCold\'; return \'<a href="'.CATSUtility::getIndexName().'?m=candidates&amp;a=show&amp;candidateID=\'.$rsData[\'candidateID\'].\'" class="\'.$className.\'">\'.htmlspecialchars($rsData[\'fullName\']).\'</a>\';',
+                                      'sortableColumn' => 'fullName',
+                                      'pagerWidth'     => 75,
+                                      'pagerOptional'  => false,
+                                      'alphaNavigation'=> true,
+                                      'filter'         => 'candidate.full_name'),
 
             'Last Name' =>      array('select'         => 'candidate.last_name AS lastName',
                                      'sortableColumn'  => 'lastName',
@@ -1204,7 +1211,7 @@ class CandidatesDataGrid extends DataGrid
                                      'alphaNavigation' => true,
                                      'filter'         => 'candidate.address'),
 
-            'City' =>           array('select'   => 'candidate.city AS city',
+            '所在城市' =>           array('select'   => 'candidate.city AS city',
                                      'sortableColumn'     => 'city',
                                      'pagerWidth'    => 80,
                                      'alphaNavigation' => true,
@@ -1234,7 +1241,7 @@ class CandidatesDataGrid extends DataGrid
                                      'pagerWidth'   => 80,
                                      'filter'         => 'candidate.web_site'),
 
-            'Key Skills' =>    array('select'  => 'candidate.key_skills AS keySkills',
+            '关键技能' =>    array('select'  => 'candidate.key_skills AS keySkills',
                                      'pagerRender' => 'return substr(trim($rsData[\'keySkills\']), 0, 30) . (strlen(trim($rsData[\'keySkills\'])) > 30 ? \'...\' : \'\');',
                                      'sortableColumn'    => 'keySkills',
                                      'pagerWidth'   => 210,
@@ -1348,7 +1355,7 @@ class CandidatesDataGrid extends DataGrid
                                      'pagerWidth'   => 80,
                                      'filter'         => 'candidate.can_relocate'),
 
-            'Owner' =>         array('select'   => 'owner_user.first_name AS ownerFirstName,' .
+            '招聘HR' =>         array('select'   => 'owner_user.first_name AS ownerFirstName,' .
                                                    'owner_user.last_name AS ownerLastName,' .
                                                    'CONCAT(owner_user.last_name, owner_user.first_name) AS ownerSort',
                                      'join'     => 'LEFT JOIN user AS owner_user ON candidate.owner = owner_user.user_id',

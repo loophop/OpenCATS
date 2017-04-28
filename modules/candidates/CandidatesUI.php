@@ -300,12 +300,12 @@ class CandidatesUI extends UserInterface
 
         /* If this is the first time we visited the datagrid this session, the recent paramaters will
          * be empty.  Fill in some default values. */
-        if ($dataGridProperties == array())
-        {
-            $dataGridProperties = array('rangeStart'    => 0,
-                                        'maxResults'    => 15,
-                                        'filterVisible' => false);
-        }
+        // if ($dataGridProperties == array())
+        // {
+        //     $dataGridProperties = array('rangeStart'    => 0,
+        //                                 'maxResults'    => 15,
+        //                                 'filterVisible' => false);
+        // }
 
         //$newParameterArray = $this->_parameters;
         $tags = new Tags($this->_siteID);
@@ -316,6 +316,9 @@ class CandidatesUI extends UserInterface
 
         $candidates = new Candidates($this->_siteID);
         $this->_template->assign('totalCandidates', $candidates->getCount());
+
+        // $file  = 'maqiulog.txt';
+        // file_put_contents($file, '$dataGrid-> '.var_dump($dataGrid).PHP_EOL,FILE_APPEND);
 
         $this->_template->assign('active', $this);
         $this->_template->assign('dataGrid', $dataGrid);
