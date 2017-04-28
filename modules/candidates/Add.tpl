@@ -177,24 +177,6 @@
                         </td>
                     </tr>
 
-                    <tr>
-                        <td class="tdVertical">
-                            <label id="emailLabel" for="email1">E-Mail:</label>
-                        </td>
-                        <td class="tdData">
-                            <input type="text" tabindex="3" name="email1" id="email1" class="inputbox" style="width: 150px" value="<?php if(isset($this->preassignedFields['email'])) $this->_($this->preassignedFields['email']); elseif (isset($this->preassignedFields['email1'])) $this->_($this->preassignedFields['email1']); ?>" onchange="checkEmailAlreadyInSystem(this.value);" />
-                        </td>
-                    </tr>
-
-                    <tr style="display: none;">
-                        <td class="tdVertical">
-                            <label id="email2Label" for="email2">2nd E-Mail:</label>
-                        </td>
-                        <td class="tdData">
-                            <input type="text" tabindex="4" name="email2" id="email2" class="inputbox" style="width: 150px" value="<?php if (isset($this->preassignedFields['email2'])) $this->_($this->preassignedFields['email2']); ?>" onchange="checkEmailAlreadyInSystem(this.value);" />
-                        </td>
-                    </tr>
-
 <!--                     <tr>
                         <td class="tdVertical">
                             <label id="dateBirthLabel" for="dateBirth">出生年月:</label>
@@ -212,6 +194,17 @@
                         </td>
                         <td class="tdData">
                             <script type="text/javascript">DateInput('dateBirth', true, 'MM-DD-YYYY', '', <?php echo($tabIndex++); ?>);</script>
+
+                            <?php /* DateInput()s take up 3 tabindexes. */ ?>
+                            <?php $tabIndex += 2; ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdVertical">
+                            <label id="dateWorkLabel" for="dateWork">开始搬砖年月:</label>
+                        </td>
+                        <td class="tdData">
+                            <script type="text/javascript">DateInput('dateWork', true, 'MM-DD-YYYY', '', <?php echo($tabIndex++); ?>);</script>
 
                             <?php /* DateInput()s take up 3 tabindexes. */ ?>
                             <?php $tabIndex += 2; ?>
@@ -244,7 +237,23 @@
                             <?php endif; ?>
                         </td>
                     </tr>
+                    <tr>
+                        <td class="tdVertical">
+                            <label id="emailLabel" for="email1">E-Mail:</label>
+                        </td>
+                        <td class="tdData">
+                            <input type="text" tabindex="3" name="email1" id="email1" class="inputbox" style="width: 150px" value="<?php if(isset($this->preassignedFields['email'])) $this->_($this->preassignedFields['email']); elseif (isset($this->preassignedFields['email1'])) $this->_($this->preassignedFields['email1']); ?>" onchange="checkEmailAlreadyInSystem(this.value);" />
+                        </td>
+                    </tr>
 
+                    <tr style="display: none;">
+                        <td class="tdVertical">
+                            <label id="email2Label" for="email2">2nd E-Mail:</label>
+                        </td>
+                        <td class="tdData">
+                            <input type="text" tabindex="4" name="email2" id="email2" class="inputbox" style="width: 150px" value="<?php if (isset($this->preassignedFields['email2'])) $this->_($this->preassignedFields['email2']); ?>" onchange="checkEmailAlreadyInSystem(this.value);" />
+                        </td>
+                    </tr>
                     <tr>
                         <td class="tdVertical">
                             <label id="phoneCellLabel" for="phoneCell">手机:</label>

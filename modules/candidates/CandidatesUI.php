@@ -2547,6 +2547,20 @@ class CandidatesUI extends UserInterface
             file_put_contents($file, 'after convert dateBirth '.$dateBirth.PHP_EOL,FILE_APPEND);
         }
 
+        $dateWork = $this->getTrimmedInput('dateWork', $_POST);
+        if (!empty($dateWork))
+        {
+            // if (!DateUtility::validate('-', $dateWork, DATE_FORMAT_MMDDYYYY))
+            // {
+            //     $this->$fatal('Invalid availability date.', $moduleDirectory);
+            // }
+
+            /* Convert start_date to something MySQL can understand. */
+            $dateWork = DateUtility::convert(
+                '-', $dateWork, DATE_FORMAT_MMDDYYYY, DATE_FORMAT_YYYYMMDD
+            );
+        }
+
 
         $formattedPhoneHome = StringUtility::extractPhoneNumber(
             $this->getTrimmedInput('phoneHome', $_POST)
@@ -2650,6 +2664,7 @@ class CandidatesUI extends UserInterface
             $keySkills,
             $dateAvailable,
             $dateBirth,
+            $dateWork,
             $currentEmployer,
             $canRelocate,
             $currentPay,
