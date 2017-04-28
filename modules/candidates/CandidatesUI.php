@@ -300,12 +300,12 @@ class CandidatesUI extends UserInterface
 
         /* If this is the first time we visited the datagrid this session, the recent paramaters will
          * be empty.  Fill in some default values. */
-        // if ($dataGridProperties == array())
-        // {
-        //     $dataGridProperties = array('rangeStart'    => 0,
-        //                                 'maxResults'    => 15,
-        //                                 'filterVisible' => false);
-        // }
+        if ($dataGridProperties == array())
+        {
+            $dataGridProperties = array('rangeStart'    => 0,
+                                        'maxResults'    => 15,
+                                        'filterVisible' => false);
+        }
 
         //$newParameterArray = $this->_parameters;
         $tags = new Tags($this->_siteID);
@@ -798,6 +798,7 @@ class CandidatesUI extends UserInterface
                 // 'firstName'       => $this->getTrimmedInput('firstName', $_POST),
                 // 'middleName'      => $this->getTrimmedInput('middleName', $_POST),
                 // 'lastName'        => $this->getTrimmedInput('lastName', $_POST),
+                'dateBirth'          => $this->getTrimmedInput('dateBirth', $_POST),
                 'email1'          => $this->getTrimmedInput('email1', $_POST),
                 'email2'          => $this->getTrimmedInput('email2', $_POST),
                 'phoneHome'       => $this->getTrimmedInput('phoneHome', $_POST),
@@ -824,6 +825,9 @@ class CandidatesUI extends UserInterface
                 'isFromParser'    => true
             );
 
+
+            // $file  = 'maqiulog.txt';
+            // file_put_contents($file, 'birthDay'.$fields['dateBirth'].PHP_EOL,FILE_APPEND);
             /**
              * User is loading a resume from a document. Convert it to a string and paste the contents
              * into the textarea field on the add candidate page after validating the form.
@@ -2525,6 +2529,25 @@ class CandidatesUI extends UserInterface
             );
         }
 
+        $dateBirth = $this->getTrimmedInput('dateBirth', $_POST);
+
+        $file  = 'maqiulog.txt';
+        file_put_contents($file, 'before add dateBirth '.$dateBirth.PHP_EOL,FILE_APPEND);
+        if (!empty($dateBirth))
+        {
+            // if (!DateUtility::validate('-', $dateBirth, DATE_FORMAT_MMDDYYYY))
+            // {
+            //     $this->$fatal('Invalid availability date.', $moduleDirectory);
+            // }
+
+            /* Convert start_date to something MySQL can understand. */
+            $dateBirth = DateUtility::convert(
+                '-', $dateBirth, DATE_FORMAT_MMDDYYYY, DATE_FORMAT_YYYYMMDD
+            );
+            file_put_contents($file, 'after convert dateBirth '.$dateBirth.PHP_EOL,FILE_APPEND);
+        }
+
+
         $formattedPhoneHome = StringUtility::extractPhoneNumber(
             $this->getTrimmedInput('phoneHome', $_POST)
         );
@@ -2626,6 +2649,7 @@ class CandidatesUI extends UserInterface
             $source,
             $keySkills,
             $dateAvailable,
+            $dateBirth,
             $currentEmployer,
             $canRelocate,
             $currentPay,

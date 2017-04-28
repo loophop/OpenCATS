@@ -75,7 +75,6 @@
                             <input type="text" tabindex="1" name="fullName" id="fullName" class="inputbox" style="width: 150px" value="<?php if(isset($this->preassignedFields['fullName'])) $this->_($this->preassignedFields['fullName']); ?>" />&nbsp;*
                         </td>
 
-
                         <td rowspan="12" align="center" valign="top">
                             <?php if ($this->isParsingEnabled): ?>
                                 <input type="hidden" name="loadDocument" id="loadDocument" value="" />
@@ -150,7 +149,6 @@
                             <?php endif; ?>
                         </td>
                     </tr>
-
                     <tr>
                         <td class="tdVertical" style="display: none;">
                             <label id="firstNameLabel" for="firstName">First Name:</label>
@@ -188,7 +186,7 @@
                         </td>
                     </tr>
 
-                    <tr>
+                    <tr style="display: none;">
                         <td class="tdVertical">
                             <label id="email2Label" for="email2">2nd E-Mail:</label>
                         </td>
@@ -197,16 +195,38 @@
                         </td>
                     </tr>
 
+<!--                     <tr>
+                        <td class="tdVertical">
+                            <label id="dateBirthLabel" for="dateBirth">出生年月:</label>
+                        </td>
+                        <td class="tdData">
+                            <script type="text/javascript">DateInput('dateAvailable', false, 'MM-DD-YY', '', <?php echo($tabIndex++); ?>);</script>
+
+                            <?php /* DateInput()s take up 3 tabindexes. */ ?>
+                            <?php $tabIndex += 2; ?>
+                        </td>
+                    </tr> -->
                     <tr>
                         <td class="tdVertical">
-                            <label id="webSiteLabel" for="webSite">Web Site:</label>
+                            <label id="dateBirthLabel" for="dateBirth">出生年月:</label>
+                        </td>
+                        <td class="tdData">
+                            <script type="text/javascript">DateInput('dateBirth', true, 'MM-DD-YYYY', '', <?php echo($tabIndex++); ?>);</script>
+
+                            <?php /* DateInput()s take up 3 tabindexes. */ ?>
+                            <?php $tabIndex += 2; ?>
+                        </td>
+                    </tr>
+                    <tr style="">
+                        <td class="tdVertical">
+                            <label id="webSiteLabel" for="webSite">学校:</label>
                         </td>
                         <td class="tdData">
                             <input type="text" tabindex="5" name="webSite" id="webSite" class="inputbox" style="width: 150px" value="<?php if (isset($this->preassignedFields['webSite'])) $this->_($this->preassignedFields['webSite']); ?>" />
                         </td>
                     </tr>
 
-                    <tr>
+                    <tr style="display: none;">
                         <td class="tdVertical">
                             <label id="phoneHomeLabel" for="phoneHome">Home Phone:</label>
                         </td>
@@ -227,14 +247,14 @@
 
                     <tr>
                         <td class="tdVertical">
-                            <label id="phoneCellLabel" for="phoneCell">Cell Phone:</label>
+                            <label id="phoneCellLabel" for="phoneCell">手机:</label>
                         </td>
                         <td class="tdData">
                             <input type="text" tabindex="7" name="phoneCell" id="phoneCell" class="inputbox" style="width: 150px;" value="<?php if (isset($this->preassignedFields['phoneCell'])) $this->_($this->preassignedFields['phoneCell']); ?>" onchange="checkPhoneAlreadyInSystem(this.value);" />
                         </td>
                     </tr>
 
-                    <tr>
+                    <tr style="display: none">
                         <td class="tdVertical">
                             <label id="phoneWorkLabel" for="phoneWork">Work Phone:</label>
                         </td>
@@ -262,7 +282,7 @@
                         </td>
                     </tr>
 
-                    <tr>
+                    <tr style="display: none;">
                         <td class="tdVertical">
                             <label id="stateLabel" for="state">State:</label>
                         </td>
@@ -271,7 +291,7 @@
                         </td>
                     </tr>
 
-                    <tr>
+                    <tr style="display: none;">
                         <td class="tdVertical">
                             <label id="zipLabel" for="zip">Postal Code:</label>
                         </td>
@@ -282,7 +302,7 @@
                         </td>
                     </tr>
 
-                    <tr>
+                    <tr style="display: none;">
                         <td class="tdVertical">
                             <label id="stateLabel" for="state">Best Time to Call:</label>
                         </td>
@@ -348,13 +368,13 @@
                          <?php if ($this->EEOSettingsRS['genderTracking'] == 1): ?>
                              <tr>
                                 <td class="tdVertical">
-                                    <label id="canRelocateLabel" for="canRelocate">Gender:</label>
+                                    <label id="canRelocateLabel" for="canRelocate">性别:</label>
                                 </td>
                                 <td class="tdData">
                                     <select id="gender" name="gender" class="inputbox" style="width:200px;" tabindex="<?php echo($tabIndex++); ?>">
                                         <option selected="selected" value="">----</option>
-                                        <option value="M"<?php if (isset($this->preassignedFields['gender']) && $this->preassignedFields['gender'] == 'M') echo ' selected'; ?>>Male</option>
-                                        <option value="F"<?php if (isset($this->preassignedFields['gender']) && $this->preassignedFields['gender'] == 'F') echo ' selected'; ?>>Female</option>
+                                        <option value="M"<?php if (isset($this->preassignedFields['gender']) && $this->preassignedFields['gender'] == 'M') echo ' selected'; ?>>男</option>
+                                        <option value="F"<?php if (isset($this->preassignedFields['gender']) && $this->preassignedFields['gender'] == 'F') echo ' selected'; ?>>女</option>
                                     </select>
                                 </td>
                              </tr>
@@ -428,7 +448,7 @@
 
                     <tr>
                         <td class="tdVertical">
-                            <label id="canRelocateLabel" for="canRelocate">Can Relocate:</label>
+                            <label id="canRelocateLabel" for="canRelocate">服从调剂:</label>
                         </td>
                         <td class="tdData">
                             <input type="checkbox" tabindex="<?php echo($tabIndex++); ?>" id="canRelocate" name="canRelocate" value="1"<?php if (isset($this->preassignedFields['canRelocate']) && $this->preassignedFields['canRelocate'] == '1') echo ' checked'; ?> />
@@ -437,7 +457,7 @@
 
                     <tr>
                         <td class="tdVertical">
-                            <label id="dateAvailableLabel" for="dateAvailable">Date Available:</label>
+                            <label id="dateAvailableLabel" for="dateAvailable">到岗时间:</label>
                         </td>
                         <td class="tdData">
                             <script type="text/javascript">DateInput('dateAvailable', false, 'MM-DD-YY', '', <?php echo($tabIndex++); ?>);</script>
@@ -458,7 +478,7 @@
 
                     <tr>
                         <td class="tdVertical">
-                            <label id="currentPayLabel" for="currentEmployer">Current Pay:</label>
+                            <label id="currentPayLabel" for="currentEmployer">当前薪资:</label>
                         </td>
                         <td class="tdData">
                             <input type="text" tabindex="<?php echo($tabIndex++); ?>" name="currentPay" id="currentPay" class="inputbox" style="width: 150px" value="<?php if (isset($this->preassignedFields['currentPay'])) $this->_($this->preassignedFields['currentPay']); ?>" />
@@ -467,7 +487,7 @@
 
                     <tr>
                         <td class="tdVertical">
-                            <label id="desiredPayLabel" for="currentEmployer">Desired Pay:</label>
+                            <label id="desiredPayLabel" for="currentEmployer">期望薪资:</label>
                         </td>
                         <td class="tdData">
                             <input type="text" tabindex="<?php echo($tabIndex++); ?>" name="desiredPay" id="desiredPay" class="inputbox" style="width: 150px" value="<?php if (isset($this->preassignedFields['desiredPay'])) $this->_($this->preassignedFields['desiredPay']); ?>" />

@@ -139,6 +139,7 @@ define('DATE_FORMAT_MMDDYY',   0x1);
 define('DATE_FORMAT_DDMMYY',   0x2);
 define('DATE_FORMAT_YYYYMMDD', 0x4);
 define('DATE_FORMAT_SECONDS',  0x8);
+define('DATE_FORMAT_MMDDYYYY', 0x10);
 
 /* Automated backup types (ASP). */
 define('BACKUP_TAR', 1);

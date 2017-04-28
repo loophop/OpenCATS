@@ -11,7 +11,7 @@ class candidatesListByViewDataGrid extends CandidatesDataGrid
     {
         /* Pager configuration. */
         $this->_tableWidth = new Width(100, '%');
-        $this->_defaultAlphabeticalSortBy = 'lastName';
+        $this->_defaultAlphabeticalSortBy = 'fullName';
         $this->ajaxMode = false;
         $this->showExportCheckboxes = true; //BOXES WILL NOT APPEAR UNLESS SQL ROW exportID IS RETURNED!
         $this->showActionArea = true;
@@ -24,11 +24,11 @@ class candidatesListByViewDataGrid extends CandidatesDataGrid
         $this->ignoreSavedColumnLayouts = true;
 
         $this->_defaultColumns = array(
-            array('name' => 'Attachments', 'width' => 31),
             array('name' => '姓名', 'width' => 85),
             array('name' => '所在城市', 'width' => 75),
             array('name' => '关键技能', 'width' => 215),
             array('name' => '招聘HR', 'width' => 65),
+            array('name' => 'Attachments', 'width' => 11),
         );
 
          parent::__construct("candidates:candidatesListByViewDataGrid",

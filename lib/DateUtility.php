@@ -110,6 +110,12 @@ class DateUtility
 
         switch ($fromFormat)
         {
+            case DATE_FORMAT_MMDDYYYY:
+                $year  = $dateFields[2];
+                $month = $dateFields[0];
+                $day   = $dateFields[1];
+                break;
+
             case DATE_FORMAT_YYYYMMDD:
                 $year  = $dateFields[0];
                 $month = $dateFields[1];
@@ -191,7 +197,13 @@ class DateUtility
                     return false;
                 }
                 break;
-
+            case DATE_FORMAT_MMDDYYYY:
+                if (strlen($dateFields[0]) != 2 || strlen($dateFields[1]) != 2 ||
+                    strlen($dateFields[2]) != 4)
+                {
+                    return false;
+                }
+                break;
             default:
                 if (strlen($dateFields[0]) != 2 || strlen($dateFields[1]) != 2 ||
                     strlen($dateFields[2]) != 2)

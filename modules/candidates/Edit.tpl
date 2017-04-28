@@ -114,7 +114,7 @@
 
                     <tr>
                         <td class="tdVertical">
-                            <label id="webSiteLabel" for="webSite">Web Site:</label>
+                            <label id="webSiteLabel" for="webSite">学校:</label>
                         </td>
                         <td class="tdData">
                             <input type="text" class="inputbox" id="webSite" name="webSite" value="<?php $this->_($this->data['webSite']); ?>" style="width: 150px" />

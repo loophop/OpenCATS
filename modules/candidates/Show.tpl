@@ -104,10 +104,10 @@
                             </tr>
 
                             <tr>
-                                <td class="vertical">Web Site:</td>
+                                <td class="vertical">学校:</td>
                                 <td class="data">
                                     <?php if (!empty($this->data['webSite'])): ?>
-                                        <a href="<?php $this->_($this->data['webSite']); ?>" target="_blank"><?php $this->_($this->data['webSite']); ?></a>
+                                    <?php $this->_($this->data['webSite']); ?>
                                     <?php endif; ?>
                                 </td>
                             </tr>
