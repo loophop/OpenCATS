@@ -210,6 +210,21 @@
                             <?php $tabIndex += 2; ?>
                         </td>
                     </tr>
+                    <tr>
+                        <td class="tdVertical">
+                            <label id="degreeLabel" for="degree">学历:</label>
+                        </td>
+                        <td class="tdData">
+                            <select id="degree" name="degree" class="inputbox" style="width:150px;" tabindex="<?php echo($tabIndex++); ?>">
+                                <option selected="selected" value="">----</option>
+                                <option value="专科"<?php if (isset($this->preassignedFields['degree']) && $this->preassignedFields['degree'] == '专科') echo ' selected'; ?>>专科</option>
+                                <option value="本科"<?php if (isset($this->preassignedFields['degree']) && $this->preassignedFields['degree'] == '本科') echo ' selected'; ?>>本科</option>
+                                <option value="硕士"<?php if (isset($this->preassignedFields['degree']) && $this->preassignedFields['degree'] == '硕士') echo ' selected'; ?>>硕士</option>
+                                <option value="博士"<?php if (isset($this->preassignedFields['degree']) && $this->preassignedFields['degree'] == '博士') echo ' selected'; ?>>博士</option>
+                            </select>
+                        </td>
+                    </tr>
+
                     <tr style="">
                         <td class="tdVertical">
                             <label id="webSiteLabel" for="webSite">学校:</label>
@@ -274,23 +289,21 @@
 
                     <tr>
                         <td class="tdVertical">
-                            <label id="addressLabel" for="address">Address:</label>
-                        </td>
-                        <td class="tdData">
-                            <textarea tabindex="9" name="address" id="address" rows="2" cols="40" class="inputbox" style="width: 150px"><?php if(isset($this->preassignedFields['address'])) $this->_($this->preassignedFields['address']); if(isset($this->preassignedFields['address2'])) $this->_("\n" . $this->preassignedFields['address2']); ?></textarea>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/indicator2.gif" id="addressParserIndicator" alt="" style="visibility: hidden; margin-left: 10px;" height="16" width="16" />
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="tdVertical">
                             <label id="cityLabel" for="city">所在城市:</label>
                         </td>
                         <td class="tdData">
                             <input type="text" tabindex="11" name="city" id="city" class="inputbox" style="width: 150px" value="<?php if(isset($this->preassignedFields['city'])) $this->_($this->preassignedFields['city']); ?>" />
                         </td>
                     </tr>
-
+                    <tr>
+                        <td class="tdVertical">
+                            <label id="addressLabel" for="address">住址:</label>
+                        </td>
+                        <td class="tdData">
+                            <textarea tabindex="9" name="address" id="address" rows="2" cols="40" class="inputbox" style="width: 150px"><?php if(isset($this->preassignedFields['address'])) $this->_($this->preassignedFields['address']); if(isset($this->preassignedFields['address2'])) $this->_("\n" . $this->preassignedFields['address2']); ?></textarea>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/indicator2.gif" id="addressParserIndicator" alt="" style="visibility: hidden; margin-left: 10px;" height="16" width="16" />
+                        </td>
+                    </tr>
                     <tr style="display: none;">
                         <td class="tdVertical">
                             <label id="stateLabel" for="state">State:</label>

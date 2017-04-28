@@ -96,7 +96,7 @@ class Candidates
         $phoneHome, $phoneCell, $phoneWork, $address, $city, $state, $zip,
         $source, $keySkills, $dateAvailable, $dateBirth, $dateWork, $currentEmployer, $canRelocate,
         $currentPay, $desiredPay, $notes, $webSite, $bestTimeToCall, $enteredBy, $owner,
-        $gender = '', $race = '', $veteran = '', $disability = '',
+        $gender = '', $degree = '', $race = '', $veteran = '', $disability = '',
         $skipHistory = false)
     {
         $sql = sprintf(
@@ -135,7 +135,8 @@ class Candidates
                 eeo_ethnic_type_id,
                 eeo_veteran_type_id,
                 eeo_disability_status,
-                eeo_gender
+                eeo_gender,
+                degree
             )
             VALUES (
                 %s,
@@ -172,6 +173,7 @@ class Candidates
                 %s,
                 %s,
                 %s,
+                %s,
                 %s
             )",
             $this->_db->makeQueryString($fullName),
@@ -205,7 +207,8 @@ class Candidates
             $this->_db->makeQueryInteger($race),
             $this->_db->makeQueryInteger($veteran),
             $this->_db->makeQueryString($disability),
-            $this->_db->makeQueryString($gender)
+            $this->_db->makeQueryString($gender),
+            $this->_db->makeQueryString($degree)
         );
         $queryResult = $this->_db->query($sql);
         if (!$queryResult)

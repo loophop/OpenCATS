@@ -816,6 +816,7 @@ class CandidatesUI extends UserInterface
                 'notes'           => $this->getTrimmedInput('notes', $_POST),
                 'canRelocate'     => $this->getTrimmedInput('canRelocate', $_POST),
                 'webSite'         => $this->getTrimmedInput('webSite', $_POST),
+                'degree'          => $this->getTrimmedInput('degree', $_POST),
                 'bestTimeToCall'  => $this->getTrimmedInput('bestTimeToCall', $_POST),
                 'gender'          => $this->getTrimmedInput('gender', $_POST),
                 'race'            => $this->getTrimmedInput('race', $_POST),
@@ -2620,6 +2621,7 @@ class CandidatesUI extends UserInterface
         $webSite         = $this->getTrimmedInput('webSite', $_POST);
         $bestTimeToCall  = $this->getTrimmedInput('bestTimeToCall', $_POST);
         $gender          = $this->getTrimmedInput('gender', $_POST);
+        $degree          = $this->getTrimmedInput('degree', $_POST);
         $race            = $this->getTrimmedInput('race', $_POST);
         $veteran         = $this->getTrimmedInput('veteran', $_POST);
         $disability      = $this->getTrimmedInput('disability', $_POST);
@@ -2675,6 +2677,7 @@ class CandidatesUI extends UserInterface
             $this->_userID,
             $this->_userID,
             $gender,
+            $degree,
             $race,
             $veteran,
             $disability
