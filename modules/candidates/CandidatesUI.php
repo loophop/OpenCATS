@@ -1122,17 +1122,7 @@ class CandidatesUI extends UserInterface
             $phoneHome = $this->getTrimmedInput('phoneHome', $_POST);
         }
 
-        $formattedPhoneCell = StringUtility::extractPhoneNumber(
-            $this->getTrimmedInput('phoneCell', $_POST)
-        );
-        if (!empty($formattedPhoneCell))
-        {
-            $phoneCell = $formattedPhoneCell;
-        }
-        else
-        {
-            $phoneCell = $this->getTrimmedInput('phoneCell', $_POST);
-        }
+        $phoneCell = $this->getTrimmedInput('phoneCell', $_POST);
 
         $formattedPhoneWork = StringUtility::extractPhoneNumber(
             $this->getTrimmedInput('phoneWork', $_POST)
@@ -2575,17 +2565,7 @@ class CandidatesUI extends UserInterface
             $phoneHome = $this->getTrimmedInput('phoneHome', $_POST);
         }
 
-        $formattedPhoneCell = StringUtility::extractPhoneNumber(
-            $this->getTrimmedInput('phoneCell', $_POST)
-        );
-        if (!empty($formattedPhoneCell))
-        {
-            $phoneCell = $formattedPhoneCell;
-        }
-        else
-        {
-            $phoneCell = $this->getTrimmedInput('phoneCell', $_POST);
-        }
+        $phoneCell = $this->getTrimmedInput('phoneCell', $_POST);
 
         $formattedPhoneWork = StringUtility::extractPhoneNumber(
             $this->getTrimmedInput('phoneWork', $_POST)
