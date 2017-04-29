@@ -52,7 +52,10 @@
                                     </span>
                                 </td>
                             </tr>
-
+                            <tr>
+                                <td class="vertical">年龄:</td>
+                                <td class="data"><?php $this->_($this->data['age']); ?></td>
+                            </tr>
                             <tr>
                                 <td class="vertical">E-Mail:</td>
                                 <td class="data">
@@ -61,7 +64,7 @@
                                     </a>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr style="display: none;">
                                 <td class="vertical">2nd E-Mail:</td>
                                 <td class="data">
                                     <a href="mailto:<?php $this->_($this->data['email2']); ?>">

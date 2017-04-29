@@ -464,6 +464,7 @@ class Candidates
             "SELECT
                 candidate.candidate_id AS candidateID,
                 candidate.is_active AS isActive,
+                ((year(now())-year(candidate.date_birth)-1)) AS age,
                 candidate.full_name AS fullName,
                 candidate.first_name AS firstName,
                 candidate.middle_name AS middleName,
@@ -557,7 +558,8 @@ class Candidates
             $this->_db->makeQueryInteger($candidateID),
             $this->_siteID
         );
-
+        $file  = 'maqiulog.txt';
+        file_put_contents($file, 'shohw sql'.$sql.PHP_EOL,FILE_APPEND);
         return $this->_db->getAssoc($sql);
     }
 
