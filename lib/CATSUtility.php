@@ -449,6 +449,27 @@ class CATSUtility
 
         return false;
     }
+
+    /**
+     * localize gender into chinese
+     *
+     * @return string Filename of index.php.
+     */
+    public static function localizeGender($gender)
+    {
+        if ($gender == 'Gender') {
+            return '性别';
+        } else if ($gender == 'Male') {
+
+            return '男';
+        } else if ($gender == 'Female') {
+
+            return '女';
+        } else {
+            return $gender;
+        }
+    }
+
 }
 
 ?>

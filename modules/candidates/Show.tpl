@@ -73,25 +73,25 @@
                                 </td>
                             </tr>
 
-                            <tr>
+<!--                             <tr>
                                 <td class="vertical">Home Phone:</td>
                                 <td class="data"><?php $this->_($this->data['phoneHome']); ?></td>
-                            </tr>
+                            </tr> -->
 
                             <tr>
-                                <td class="vertical">Cell Phone:</td>
+                                <td class="vertical">手机:</td>
                                 <td class="data"><?php $this->_($this->data['phoneCell']); ?></td>
                             </tr>
 
-                            <tr>
+<!--                             <tr>
                                 <td class="vertical">Work Phone:</td>
                                 <td class="data"><?php $this->_($this->data['phoneWork']); ?></td>
-                            </tr>
+                            </tr> -->
 
-                            <tr>
+<!--                             <tr>
                                 <td class="vertical">Best Time To Call:</td>
                                 <td class="data"><?php $this->_($this->data['bestTimeToCall']); ?></td>
-                            </tr>
+                            </tr> -->
 
                             <tr>
                                 <td class="vertical">所在城市:</td>
@@ -113,6 +113,10 @@
                                     <?php $this->_($this->data['webSite']); ?>
                                     <?php endif; ?>
                                 </td>
+                            </tr>
+                            <tr>
+                                <td class="vertical">学历:</td>
+                                <td class="data"><?php $this->_($this->data['degree']); ?></td>
                             </tr>
 
                             <tr>
@@ -140,33 +144,36 @@
                         </td><td width="50%" height="100%" valign="top">
                     <?php endif; ?>
                         <table class="detailsInside" height="100%">
-                            <tr>
+<!--                             <tr>
                                 <td class="vertical">Date Available:</td>
                                 <td class="data"><?php $this->_($this->data['dateAvailable']); ?></td>
+                            </tr> -->
+                            <tr>
+                                <td class="vertical">工作年限:</td>
+                                <td class="data"><?php $this->_($this->data['workage']); ?></td>
                             </tr>
-
                             <tr>
                                 <td class="vertical">最近公司:</td>
                                 <td class="data"><?php $this->_($this->data['currentEmployer']); ?></td>
                             </tr>
 
                             <tr>
-                                <td class="vertical">Key Skills:</td>
+                                <td class="vertical">关键技能:</td>
                                 <td class="data"><?php $this->_($this->data['keySkills']); ?></td>
                             </tr>
 
                             <tr>
-                                <td class="vertical">Can Relocate:</td>
+                                <td class="vertical">可调剂:</td>
                                 <td class="data"><?php $this->_($this->data['canRelocate']); ?></td>
                             </tr>
 
                             <tr>
-                                <td class="vertical">Current Pay:</td>
+                                <td class="vertical">当前薪资:</td>
                                 <td class="data"><?php $this->_($this->data['currentPay']); ?></td>
                             </tr>
 
                             <tr>
-                                <td class="vertical">Desired Pay:</td>
+                                <td class="vertical">期望薪资:</td>
                                 <td class="data"><?php $this->_($this->data['desiredPay']); ?></td>
                             </tr>
 
@@ -233,7 +240,7 @@
             <?php if($this->EEOSettingsRS['enabled'] == 1): ?>
                 <table class="detailsOutside">
                     <tr>
-                        <td>
+<!--         Only Gender Fields                 <td>
                             <table class="detailsInside">
                                 <?php for ($i = 0; $i < intval(count($this->EEOValues)/2); $i++): ?>
                                     <tr>
@@ -246,7 +253,7 @@
                                     </tr>
                                 <?php endfor; ?>
                             </table>
-                        </td>
+                        </td> -->
                         <?php if ($profileImage): ?>
                             <td width="390" height="100%" valign="top">
                         <?php else: ?>
@@ -255,9 +262,11 @@
                             <table class="detailsInside">
                                 <?php for ($i = (intval(count($this->EEOValues))/2); $i < intval(count($this->EEOValues)); $i++): ?>
                                     <tr>
-                                        <td class="vertical"><?php $this->_($this->EEOValues[$i]['fieldName']); ?>:</td>
+                                        <td class="vertical">
+                                            <?php $this->_(CATSUtility::localizeGender($this->EEOValues[$i]['fieldName']));?>
+                                        </td>
                                         <?php if($this->EEOSettingsRS['canSeeEEOInfo']): ?>
-                                            <td class="data"><?php $this->_($this->EEOValues[$i]['fieldValue']); ?></td>
+                                            <td class="data"><?php $this->_(CATSUtility::localizeGender($this->EEOValues[$i]['fieldValue'])); ?></td>
                                         <?php else: ?>
                                             <td class="data"><i><a href="javascript:void(0);" title="Ask an administrator to see the EEO info, or have permission  granted to see it.">(Hidden)</a></i></td>
                                         <?php endif; ?>
@@ -592,7 +601,17 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
 
+        function locolizeGender(gender)
+        {
+            if (gender == 'Gender') {
+                return '性别';
+            }
+            return gender;
+        }
+
+    </script>
 <?php endif; ?>
 	
 <?php TemplateUtility::printFooter(); ?>
