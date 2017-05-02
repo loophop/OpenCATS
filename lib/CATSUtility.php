@@ -457,12 +457,14 @@ class CATSUtility
      */
     public static function localizeGender($gender)
     {
+        // $file  = 'maqiulog.txt';
+        // file_put_contents($file, 'localizeGender '.$gender.PHP_EOL,FILE_APPEND);
+
         if ($gender == 'Gender') {
             return '性别';
-        } else if ($gender == 'Male') {
-
+        } else if ($gender == 'Male' || $gender == 'm') {
             return '男';
-        } else if ($gender == 'Female') {
+        } else if ($gender == 'Female' || $gender == 'f') {
 
             return '女';
         } else {

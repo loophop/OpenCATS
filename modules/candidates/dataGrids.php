@@ -25,8 +25,15 @@ class candidatesListByViewDataGrid extends CandidatesDataGrid
 
         $this->_defaultColumns = array(
             array('name' => '姓名', 'width' => 85),
-            array('name' => '所在城市', 'width' => 75),
-            array('name' => '关键技能', 'width' => 215),
+            array('name' => '性别', 'width' => 11),
+            array('name' => '年龄', 'width' => 11),
+            array('name' => '学校', 'width' => 30),
+            array('name' => '学历', 'width' => 11),
+            array('name' => '工作年限', 'width' => 20),
+            array('name' => '最近公司', 'width' => 30),
+            array('name' => '所在城市', 'width' => 20),
+            array('name' => '关键技能', 'width' => 100),
+            array('name' => '简历状态', 'width' => 100),
             array('name' => '招聘HR', 'width' => 65),
             array('name' => 'Attachments', 'width' => 11),
         );

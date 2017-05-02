@@ -1193,6 +1193,27 @@ class CandidatesDataGrid extends DataGrid
                                       'pagerOptional'  => false,
                                       'alphaNavigation'=> true,
                                       'filter'         => 'candidate.first_name'),
+            '性别' =>     array('select'         => 'candidate.eeo_gender AS gender',
+                                      'pagerRender'      => 'return CATSUtility::localizeGender($rsData[\'gender\']);',
+                                      'sortableColumn' => 'gender',
+                                      'pagerWidth'     => 11,
+                                      'pagerOptional'  => false,
+                                      'filter'         => 'candidate.eeo_gender'),
+            
+            '工作年限' =>      array('select'   => '((year(now())-year(candidate.date_work)-1)) AS workAge',
+                                     'pagerRender'      => 'return $rsData[\'workAge\'];',
+                                     'sortableColumn'   => 'workAge',
+                                     'pagerWidth'       => 20,
+                                     'pagerOptional'    => false,
+                                     'filterHaving'     => 'DATE_FORMAT(candidate.date_work, \'%m-%d-%Y\')'),
+
+            '年龄' =>      array('select'   => '((year(now())-year(candidate.date_birth)-1)) AS age',
+                                     'pagerRender'      => 'return $rsData[\'age\'];',
+                                     'sortableColumn'   => 'age',
+                                     'pagerWidth'       => 11,
+                                     'pagerOptional'    => false,
+                                     'filterHaving'     => 'DATE_FORMAT(candidate.date_birth, \'%m-%d-%Y\')'),
+
             '姓名' =>     array('select'         => 'candidate.full_name AS fullName',
                                       'pagerRender'    => 'if ($rsData[\'isHot\'] == 1) $className =  \'jobLinkHot\'; else $className = \'jobLinkCold\'; return \'<a href="'.CATSUtility::getIndexName().'?m=candidates&amp;a=show&amp;candidateID=\'.$rsData[\'candidateID\'].\'" class="\'.$className.\'">\'.htmlspecialchars($rsData[\'fullName\']).\'</a>\';',
                                       'sortableColumn' => 'fullName',
@@ -1264,16 +1285,22 @@ class CandidatesDataGrid extends DataGrid
                                      'pagerWidth'   => 300,
                                      'filter'         => 'candidate.notes'),
 
-            'Web Site' =>      array('select'  => 'candidate.web_site AS webSite',
+            '学校' =>      array('select'  => 'candidate.web_site AS webSite',
                                      'pagerRender'     => 'return \'<a href="\'.htmlspecialchars($rsData[\'webSite\']).\'">\'.htmlspecialchars($rsData[\'webSite\']).\'</a>\';',
                                      'sortableColumn'    => 'webSite',
-                                     'pagerWidth'   => 80,
+                                     'pagerWidth'   => 20,
                                      'filter'         => 'candidate.web_site'),
+            '学历' =>      array('select'              => 'candidate.degree AS degree',
+                                      'pagerRender'    => 'return CATSUtility::localizeGender($rsData[\'degree\']);',
+                                      'sortableColumn' => 'degree',
+                                      'pagerWidth'     => 11,
+                                      'pagerOptional'  => false,
+                                      'filter'         => 'candidate.degree'),
 
             '关键技能' =>    array('select'  => 'candidate.key_skills AS keySkills',
                                      'pagerRender' => 'return substr(trim($rsData[\'keySkills\']), 0, 30) . (strlen(trim($rsData[\'keySkills\'])) > 30 ? \'...\' : \'\');',
                                      'sortableColumn'    => 'keySkills',
-                                     'pagerWidth'   => 210,
+                                     'pagerWidth'   => 100,
                                      'filter'         => 'candidate.key_skills'),
 
             'Recent Status' => array('select'  => '(
@@ -1312,7 +1339,7 @@ class CandidatesDataGrid extends DataGrid
                                      'filterHaving'  => 'lastStatus',
                                      'filterTypes'   => '=~'),
 
-            'Recent Status (Extended)' => array('select'  => '(
+            '简历状态' => array('select'  => '(
                                                     SELECT
                                                         CONCAT(
                                                             candidate_joborder_status.short_description,
@@ -1345,7 +1372,7 @@ class CandidatesDataGrid extends DataGrid
                                                 ',
                                      'sortableColumn'    => 'lastStatusLong',
                                      'pagerRender'     => 'return $rsData[\'lastStatusLong\'];',
-                                     'pagerWidth'   => 310,
+                                     'pagerWidth'   => 100,
                                      'exportable' => false,
                                      'filterable' => false),
 
@@ -1359,7 +1386,7 @@ class CandidatesDataGrid extends DataGrid
                                      'sortableColumn'     => 'dateAvailable',
                                      'pagerWidth'    => 60),
 
-            'Current Employer' => array('select'  => 'candidate.current_employer AS currentEmployer',
+            '最近公司' => array('select'  => 'candidate.current_employer AS currentEmployer',
                                      'sortableColumn'    => 'currentEmployer',
                                      'pagerWidth'   => 125,
                                      'alphaNavigation' => true,

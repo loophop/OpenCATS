@@ -27,16 +27,16 @@
 
                             <?php TemplateUtility::printSavedSearch($this->savedSearchRS); ?>
 
-                            <label id="searchModeLabel" for="searchMode">Search By:</label>&nbsp;
+                            <label id="searchModeLabel" for="searchMode">通过:</label>&nbsp;
                             <select id="searchMode" name="mode" onclick="advancedSearchConsider();" class="selectBox">
-                                <option value="searchByFullName"<?php if ($this->mode == "searchByFullName"): ?> selected<?php endif; ?>>Candidate Name</option>
-                                <option value="searchByResume"<?php if ($this->mode == "searchByResume" || empty($this->mode)): ?> selected<?php endif; ?>>Resume Keywords</option>
-                                <option value="searchByKeySkills"<?php if ($this->mode == "searchByKeySkills"): ?> selected<?php endif; ?>>Key Skills</option>
-                                <option value="searchByCity"<?php if ($this->mode == "searchByCity"): ?> selected<?php endif; ?>>City</option>
-                                <option value="phoneNumber"<?php if ($this->mode == "phoneNumber"): ?> selected<?php endif; ?>>Phone Number</option>
+                                <option value="searchByFullName"<?php if ($this->mode == "searchByFullName"): ?> selected<?php endif; ?>>姓名</option>
+                                <option value="searchByResume"<?php if ($this->mode == "searchByResume" || empty($this->mode)): ?> selected<?php endif; ?>>简历内容</option>
+                                <option value="searchByKeySkills"<?php if ($this->mode == "searchByKeySkills"): ?> selected<?php endif; ?>>关键技能</option>
+                                <option value="searchByCity"<?php if ($this->mode == "searchByCity"): ?> selected<?php endif; ?>>所在城市</option>
+                                <option value="phoneNumber"<?php if ($this->mode == "phoneNumber"): ?> selected<?php endif; ?>>手机号码</option>
                             </select>&nbsp;
                             <input type="text" class="inputbox" id="searchText" name="wildCardString" value="<?php if (!empty($this->wildCardString)) $this->_($this->wildCardString); ?>" style="width:250px" />&nbsp;*&nbsp;
-                            <input type="submit" class="button" id="searchCandidates" name="searchCandidates" value="Search" />
+                            <input type="submit" class="button" id="searchCandidates" name="searchCandidates" value="检索" />
                             <?php TemplateUtility::printAdvancedSearch('searchByKeySkills,searchByResume'); ?>
                         </form>
                     </td>
