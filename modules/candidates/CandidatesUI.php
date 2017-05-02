@@ -2535,14 +2535,14 @@ class CandidatesUI extends UserInterface
         $dateAvailable = $this->getTrimmedInput('dateAvailable', $_POST);
         if (!empty($dateAvailable))
         {
-            if (!DateUtility::validate('-', $dateAvailable, DATE_FORMAT_MMDDYY))
+            if (!DateUtility::validate('-', $dateAvailable, DATE_FORMAT_MMDDYYYY))
             {
                 $this->$fatal('Invalid availability date.', $moduleDirectory);
             }
 
             /* Convert start_date to something MySQL can understand. */
             $dateAvailable = DateUtility::convert(
-                '-', $dateAvailable, DATE_FORMAT_MMDDYY, DATE_FORMAT_YYYYMMDD
+                '-', $dateAvailable, DATE_FORMAT_MMDDYYYY, DATE_FORMAT_YYYYMMDD
             );
         }
 
