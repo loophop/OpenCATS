@@ -269,10 +269,10 @@
 
                      <tr>
                         <td class="tdVertical">
-                            <label id="sourceLabel" for="image">Picture:</label>
+                            <label id="sourceLabel" for="image">照片:</label>
                         </td>
                         <td class="tdData">
-                            <input type="button" class="button" id="addImage" name="addImage" value="Edit Profile Picture" style="width:150px;" onclick="showPopWin('<?php echo(CATSUtility::getIndexName()); ?>?m=candidates&amp;a=addEditImage&amp;candidateID=<?php echo($this->candidateID); ?>', 400, 370, null); return false;" />&nbsp;
+                            <input type="button" class="button" id="addImage" name="addImage" value="编辑照片" style="width:150px;" onclick="showPopWin('<?php echo(CATSUtility::getIndexName()); ?>?m=candidates&amp;a=addEditImage&amp;candidateID=<?php echo($this->candidateID); ?>', 400, 370, null); return false;" />&nbsp;
                         </td>
                     </tr>
                 </table>
@@ -404,7 +404,7 @@
 
                     <tr>
                         <td class="tdVertical">
-                            <label id="currentPayLabel" for="currentEmployer">Current Pay:</label>
+                            <label id="currentPayLabel" for="currentEmployer">当前薪资:</label>
                         </td>
                         <td class="tdData">
                             <input type="text" name="currentPay" id="currentPay" value="<?php $this->_($this->data['currentPay']); ?>" class="inputbox" style="width: 150px" />
@@ -413,7 +413,7 @@
 
                     <tr>
                         <td class="tdVertical">
-                            <label id="desiredPayLabel" for="currentEmployer">Desired Pay:</label>
+                            <label id="desiredPayLabel" for="currentEmployer">期望薪资:</label>
                         </td>
                         <td class="tdData">
                             <input type="text" name="desiredPay" id="desiredPay" value="<?php $this->_($this->data['desiredPay']); ?>" class="inputbox" style="width: 150px" />
@@ -434,7 +434,7 @@
 
                     <tr>
                         <td class="tdVertical">
-                            <label id="notesLabel" for="notes">Misc. Notes:</label>
+                            <label id="notesLabel" for="notes">备注:</label>
                         </td>
                         <td class="tdData">
                             <textarea class="inputbox" id="notes" name="notes" rows="5" style="width: 400px;"><?php $this->_($this->data['notes']); ?></textarea>

@@ -1102,14 +1102,33 @@ class CandidatesUI extends UserInterface
         $dateAvailable = $this->getTrimmedInput('dateAvailable', $_POST);
         if (!empty($dateAvailable))
         {
-            if (!DateUtility::validate('-', $dateAvailable, DATE_FORMAT_MMDDYY))
+            if (!DateUtility::validate('-', $dateAvailable, DATE_FORMAT_MMDDYYYY))
             {
-                CommonErrors::fatal(COMMONERROR_MISSINGFIELDS, $this, 'Invalid availability date.');
+                CommonErrors::fatal(COMMONERROR_MISSINGFIELDS, $this, 'Invalid availability date'.$dateAvailable);
             }
 
             /* Convert start_date to something MySQL can understand. */
             $dateAvailable = DateUtility::convert(
-                '-', $dateAvailable, DATE_FORMAT_MMDDYY, DATE_FORMAT_YYYYMMDD
+                '-', $dateAvailable, DATE_FORMAT_MMDDYYYY, DATE_FORMAT_YYYYMMDD
+            );
+        }
+
+        $dateBirth = $this->getTrimmedInput('dateBirth', $_POST);
+        if (!empty($dateBirth))
+        {
+            /* Convert start_date to something MySQL can understand. */
+            $dateBirth = DateUtility::convert(
+                '-', $dateBirth, DATE_FORMAT_MMDDYYYY, DATE_FORMAT_YYYYMMDD
+            );
+            file_put_contents($file, 'after convert dateBirth '.$dateBirth.PHP_EOL,FILE_APPEND);
+        }
+
+        $dateWork = $this->getTrimmedInput('dateWork', $_POST);
+        if (!empty($dateWork))
+        {
+            /* Convert start_date to something MySQL can understand. */
+            $dateWork = DateUtility::convert(
+                '-', $dateWork, DATE_FORMAT_MMDDYYYY, DATE_FORMAT_YYYYMMDD
             );
         }
 
@@ -1231,6 +1250,7 @@ class CandidatesUI extends UserInterface
         $race            = $this->getTrimmedInput('race', $_POST);
         $veteran         = $this->getTrimmedInput('veteran', $_POST);
         $disability      = $this->getTrimmedInput('disability', $_POST);
+        $degree          = $this->getTrimmedInput('degree', $_POST);
 
         /* Candidate source list editor. */
         $sourceCSV = $this->getTrimmedInput('sourceCSV', $_POST);
@@ -1263,6 +1283,8 @@ class CandidatesUI extends UserInterface
             $source,
             $keySkills,
             $dateAvailable,
+            $dateBirth,
+            $dateWork,
             $currentEmployer,
             $canRelocate,
             $currentPay,
@@ -1275,6 +1297,7 @@ class CandidatesUI extends UserInterface
             $email,
             $emailAddress,
             $gender,
+            $degree,
             $race,
             $veteran,
             $disability

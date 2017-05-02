@@ -483,7 +483,7 @@
                             <label id="dateAvailableLabel" for="dateAvailable">到岗时间:</label>
                         </td>
                         <td class="tdData">
-                            <script type="text/javascript">DateInput('dateAvailable', false, 'MM-DD-YY', '', -1);</script>
+                            <script type="text/javascript">DateInput('dateAvailable', false, 'MM-DD-YYYY', '', -1);</script>
 
                             <?php /* DateInput()s take up 3 tabindexes. */ ?>
                             <?php $tabIndex += 2; ?>

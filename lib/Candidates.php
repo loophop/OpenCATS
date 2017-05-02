@@ -262,10 +262,10 @@ class Candidates
      */
     public function update($candidateID, $isActive, $fullName, $firstName, $middleName, $lastName,
         $email1, $email2, $phoneHome, $phoneCell, $phoneWork, $address,
-        $city, $state, $zip, $source, $keySkills, $dateAvailable,
+        $city, $state, $zip, $source, $keySkills, $dateAvailable, $dateBirth, $dateWork,
         $currentEmployer, $canRelocate, $currentPay, $desiredPay,
         $notes, $webSite, $bestTimeToCall, $owner, $isHot, $email, $emailAddress,
-        $gender = '', $race = '', $veteran = '', $disability = '')
+        $gender = '', $degree = '', $race = '', $veteran = '', $disability = '')
     {
         $sql = sprintf(
             "UPDATE
@@ -288,6 +288,8 @@ class Candidates
                 source                = %s,
                 key_skills            = %s,
                 date_available        = %s,
+                date_birth            = %s,
+                date_work             = %s,
                 current_employer      = %s,
                 current_pay           = %s,
                 desired_pay           = %s,
@@ -301,7 +303,8 @@ class Candidates
                 eeo_ethnic_type_id    = %s,
                 eeo_veteran_type_id   = %s,
                 eeo_disability_status = %s,
-                eeo_gender            = %s
+                eeo_gender            = %s,
+                degree = %s
             WHERE
                 candidate_id = %s
             AND
@@ -323,6 +326,8 @@ class Candidates
             $this->_db->makeQueryString($source),
             $this->_db->makeQueryString($keySkills),
             $this->_db->makeQueryStringOrNULL($dateAvailable),
+            $this->_db->makeQueryStringOrNULL($dateBirth),
+            $this->_db->makeQueryStringOrNULL($dateWork),
             $this->_db->makeQueryString($currentEmployer),
             $this->_db->makeQueryString($currentPay),
             $this->_db->makeQueryString($desiredPay),
@@ -336,6 +341,7 @@ class Candidates
             $this->_db->makeQueryInteger($veteran),
             $this->_db->makeQueryString($disability),
             $this->_db->makeQueryString($gender),
+            $this->_db->makeQueryString($degree),
             $this->_db->makeQueryInteger($candidateID),
             $this->_siteID
         );

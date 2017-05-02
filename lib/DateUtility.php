@@ -187,6 +187,9 @@ class DateUtility
             return false;
         }
 
+        $file  = 'maqiulog.txt';
+        file_put_contents($file, 'validate $separator'.$separator.'$dateString'.$dateString.'$format'.$format.PHP_EOL,FILE_APPEND);
+
         /* Check the length of individual date fields. */
         switch ($format)
         {
@@ -236,7 +239,16 @@ class DateUtility
                 $month = $dateFields[1];
                 $year  = $dateFields[2];
                 break;
+
+            case DATE_FORMAT_MMDDYYYY:
+                $month = $dateFields[0];
+                $day   = $dateFields[1];
+                $year  = $dateFields[2];
+                break;
+
         }
+
+        file_put_contents($file, 'validate $month'.$month.'$day'.$day.'$year'.$year.PHP_EOL,FILE_APPEND);
 
         /* Validate day and month numbers. */
         if ($month < 1 || $month > 12 || $day < 1 ||
