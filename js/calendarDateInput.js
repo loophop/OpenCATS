@@ -355,7 +355,7 @@ function dateObject() {
 	}
 	
    ParentObject.yearValue = ParentObject.date.getFullYear();
-   if (ParentObject.yearValue < 1995) ParentObject.yearValue += 100;
+   if (ParentObject.yearValue < 1965) ParentObject.yearValue += 100;
    ParentObject.monthIndex = ParentObject.date.getMonth();
 
    ParentObject.monthName = MonthNames[ParentObject.monthIndex];
@@ -373,6 +373,8 @@ function storedMonthObject(DateFormat, DateYear, DateMonth, DateDay) {
    this.yearPad = this.yearValue.toString();
    this.monthPad = (this.monthIndex < 9) ? '0' + String(this.monthIndex + 1) : this.monthIndex + 1;
    this.dayPad = (this.day < 10) ? '0' + this.day.toString() : this.day;
+   
+   //console.log("storedMonthObject this.yearPad"+this.yearPad);
 
    this.monthShort = this.monthName.substr(0,3).toUpperCase();
    // Formats the year with 2 digits instead of 4
@@ -429,6 +431,7 @@ function SetPickedMonth(PickedYear, PickedMonth, PickedDay) {
 //alert('spm - ' + PickedYear);
    this.picked = new storedMonthObject(this.format, PickedYear, PickedMonth, PickedDay);
    this.setHidden(this.picked.formatted);
+   //console.log("this.picked.formatted"+this.picked.formatted+" this.format + "+this.format+" SetPickedMonth"+PickedYear+PickedMonth+PickedDay);
    this.setDisplayed(PickedYear, PickedMonth);
 }
 
@@ -530,6 +533,8 @@ function calendarObject(DateName, DateFormat, DefaultDate) {
                   var DayPart = RegExp.$3;
                }
                MonthPart = (/\d{1,2}/i.test(MonthPart)) ? parseInt(MonthPart, 10) - 1 : getMonthIndex(MonthPart);
+
+               //console.log("DefaultDate"+DefaultDate+"YearPart"+YearPart+"MonthPart"+MonthPart+"parseInt(DayPart, 10)"+parseInt(DayPart, 10));
                this.setPicked(YearPart, MonthPart, parseInt(DayPart, 10));
             }
             else SetGoodDate(this, true);
@@ -562,6 +567,7 @@ function DateInput(DateName, Required, DateFormat, DefaultDate, TabIndex)
         DefaultDate = CurrentDate.formatted;
     }
 
+    //console.log("DateFormat:"+DateFormat+"DefaultDate:"+DefaultDate+"DateName:"+DateName);
     /* Create the Calendar object. */
     eval(
         DateName + '_Object = new calendarObject(\'' + DateName +
@@ -576,6 +582,7 @@ function DateInput(DateName, Required, DateFormat, DefaultDate, TabIndex)
     if (Required || DefaultDate != '')
     {
         var initialStatus = '';
+        //console.log("object.picked.formatted"+object.picked.formatted);
         var initialDate = object.picked.formatted;
     }
     else

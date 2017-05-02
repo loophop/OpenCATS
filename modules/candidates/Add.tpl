@@ -193,7 +193,7 @@
                             <label id="dateBirthLabel" for="dateBirth">出生年月:</label>
                         </td>
                         <td class="tdData">
-                            <script type="text/javascript">DateInput('dateBirth', true, 'MM-DD-YYYY', '', -1);</script>
+                            <script type="text/javascript">DateInput('dateBirth', false, 'MM-DD-YYYY', '', -1);</script>
 
                             <?php /* DateInput()s take up 3 tabindexes. */ ?>
                             <?php $tabIndex += 2; ?>
@@ -204,12 +204,22 @@
                             <label id="dateWorkLabel" for="dateWork">开始搬砖年月:</label>
                         </td>
                         <td class="tdData">
-                            <script type="text/javascript">DateInput('dateWork', true, 'MM-DD-YYYY', '', -1);</script>
+                            <script type="text/javascript">DateInput('dateWork', false, 'MM-DD-YYYY', '', -1);</script>
 
                             <?php /* DateInput()s take up 3 tabindexes. */ ?>
                             <?php $tabIndex += 2; ?>
                         </td>
                     </tr>
+
+                    <tr style="">
+                        <td class="tdVertical">
+                            <label id="webSiteLabel" for="webSite">学校:</label>
+                        </td>
+                        <td class="tdData">
+                            <input type="text" name="webSite" id="webSite" class="inputbox" style="width: 150px" value="<?php if (isset($this->preassignedFields['webSite'])) $this->_($this->preassignedFields['webSite']); ?>" />
+                        </td>
+                    </tr>
+
                     <tr>
                         <td class="tdVertical">
                             <label id="degreeLabel" for="degree">学历:</label>
@@ -225,14 +235,6 @@
                         </td>
                     </tr>
 
-                    <tr style="">
-                        <td class="tdVertical">
-                            <label id="webSiteLabel" for="webSite">学校:</label>
-                        </td>
-                        <td class="tdData">
-                            <input type="text" name="webSite" id="webSite" class="inputbox" style="width: 150px" value="<?php if (isset($this->preassignedFields['webSite'])) $this->_($this->preassignedFields['webSite']); ?>" />
-                        </td>
-                    </tr>
 
                     <tr style="display: none;">
                         <td class="tdVertical">

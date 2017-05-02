@@ -70,14 +70,41 @@
 
                     <tr>
                         <td class="tdVertical">
+                            <label id="dateBirthLabel" for="dateBirth">出生年月:</label>
+                        </td>
+                        <td class="tdData">
+                            <?php if (!empty($this->data['dateBirth'])): ?>
+                                <script type="text/javascript">DateInput('dateBirth', false, 'MM-DD-YYYY', '<?php echo($this->data['dateBirthMDY']); ?>', -1);</script>
+                            <?php else: ?>
+                                <script type="text/javascript">DateInput('dateBirth', false, 'MM-DD-YYYY', '', -1);</script>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="tdVertical">
+                            <label id="dateWorkLabel" for="dateWork">开始搬砖年月:</label>
+                        </td>
+                        <td class="tdData">
+                            <?php if (!empty($this->data['dateWork'])): ?>
+                                <script type="text/javascript">DateInput('dateWork', false, 'MM-DD-YYYY', '<?php echo($this->data['dateWorkMDY']); ?>', -1);</script>
+                            <?php else: ?>
+                                <script type="text/javascript">DateInput('dateWork', false, 'MM-DD-YYYY', '', -1);</script>
+                            <?php endif; ?>
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="tdVertical">
                             <label id="email1Label" for="email1">E-Mail:</label>
                         </td>
                         <td class="tdData">
                             <input type="text" class="inputbox" id="email1" name="email1" value="<?php $this->_($this->data['email1']); ?>" style="width: 150px;" />
                         </td>
                     </tr>
-                    <tr>
-                        <td class="tdVertical">
+                    <tr style="display: none;">
+                        <td class="tdVertical" >
                             <label id="email2Label" for="email2">2nd E-Mail:</label>
                         </td>
                         <td class="tdData">
@@ -85,8 +112,8 @@
                         </td>
                     </tr>
 
-                    <tr>
-                        <td class="tdVertical">
+                    <tr style="display: none;">
+                        <td class="tdVertical" >
                             <label id="phoneHomeLabel" for="phoneHome">Home Phone:</label>
                         </td>
                         <td class="tdData">
@@ -96,15 +123,15 @@
 
                     <tr>
                         <td class="tdVertical">
-                            <label id="phoneCellLabel" for="phoneCell">Cell Phone:</label>
+                            <label id="phoneCellLabel" for="phoneCell">手机:</label>
                         </td>
                         <td class="tdData">
                             <input type="text" class="inputbox" id="phoneCell" name="phoneCell" value="<?php $this->_($this->data['phoneCell']); ?>" style="width: 150px;" />
                         </td>
                     </tr>
 
-                    <tr>
-                        <td class="tdVertical">
+                    <tr style="display: none;">
+                        <td class="tdVertical" >
                             <label id="phoneWorkLabel" for="phoneWork">Work Phone:</label>
                         </td>
                         <td class="tdData">
@@ -123,7 +150,22 @@
 
                     <tr>
                         <td class="tdVertical">
-                            <label id="addressLabel" for="address1">Address:</label>
+                            <label id="degreeLabel" for="degree">学历:</label>
+                        </td>
+                        <td class="tdData">
+                            <select id="degree" name="degree" class="inputbox" style="width:150px;" >
+                                <option selected="selected" value="">----</option>
+                                <option value="专科"<?php if ($this->data['degree'] == '专科') echo ' selected'; ?>>专科</option>
+                                <option value="本科"<?php if ($this->data['degree'] == '本科') echo ' selected'; ?>>本科</option>
+                                <option value="硕士"<?php if ($this->data['degree'] == '硕士') echo ' selected'; ?>>硕士</option>
+                                <option value="博士"<?php if ($this->data['degree'] == '博士') echo ' selected'; ?>>博士</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="tdVertical">
+                            <label id="addressLabel" for="address1">住址:</label>
                         </td>
                         <td class="tdData">
                             <textarea class="inputbox" id="address" name="address" style="width: 150px;"><?php $this->_($this->data['address']); ?></textarea>
@@ -139,8 +181,8 @@
                         </td>
                     </tr>
 
-                    <tr>
-                        <td class="tdVertical">
+                    <tr style="display: none;">
+                        <td class="tdVertical" >
                             <label id="stateLabel" for="state">State:</label>
                         </td>
                         <td class="tdData">
@@ -148,7 +190,7 @@
                         </td>
                     </tr>
 
-                    <tr>
+                    <tr  style="display: none;">
                         <td class="tdVertical">
                             <label id="zipLabel" for="zip">Postal Code:</label>
                         </td>
@@ -159,7 +201,7 @@
                         </td>
                     </tr>
 
-                    <tr>
+                    <tr style="display: none;">
                         <td class="tdVertical">
                             <label id="canRelocateLabel" for="canRelocate">Best Time To Call:</label>
                         </td>
@@ -170,7 +212,7 @@
 
                     <tr>
                         <td class="tdVertical" valign="top" style="height: 28px;">
-                            <label id="isHotLabel" for="isHot">Hot Candidate:</label>
+                            <label id="isHotLabel" for="isHot">热门人选:</label>
                         </td>
                         <td class="tdData" >
                             <input type="checkbox" id="isHot" name="isHot"<?php if ($this->data['isHot'] == 1): ?> checked<?php endif; ?> />
@@ -185,7 +227,7 @@
                         <td class="tdData">
                             <select id="sourceSelect" name="source" class="inputbox" style="width: 150px;" onchange="if (this.value == 'edit') { listEditor('Sources', 'sourceSelect', 'sourceCSV', false, ''); this.value = '(none)'; } if (this.value == 'nullline') { this.value = '(none)'; }">
                                 <option value="edit">(Edit Sources)</option>
-                                <option value="nullline">-------------------------------</option>
+<!--                                 <option value="nullline">-------------------------------</option> -->
                                 <?php if ($this->sourceInRS == false): ?>
                                     <?php if ($this->data['source'] != '(none)'): ?>
                                         <option value="(none)">(None)</option>
@@ -213,9 +255,9 @@
 
                                 <?php foreach ($this->usersRS as $rowNumber => $usersData): ?>
                                     <?php if ($this->data['owner'] == $usersData['userID']): ?>
-                                        <option selected="selected" value="<?php $this->_($usersData['userID']) ?>"><?php $this->_($usersData['fullName']) ?></option>
+                                        <option selected="selected" value="<?php $this->_($usersData['userID']) ?>"><?php $this->_($usersData['username']) ?></option>
                                     <?php else: ?>
-                                        <option value="<?php $this->_($usersData['userID']) ?>"><?php $this->_($usersData['fullName']) ?></option>
+                                        <option value="<?php $this->_($usersData['userID']) ?>"><?php $this->_($usersData['username']) ?></option>
                                     <?php endif; ?>
                                 <?php endforeach; ?>
                             </select>&nbsp;*
@@ -252,13 +294,13 @@
                          <?php if ($this->EEOSettingsRS['genderTracking'] == 1): ?>
                              <tr>
                                 <td class="tdVertical">
-                                    <label id="canRelocateLabel" for="canRelocate">Gender:</label>
+                                    <label id="canRelocateLabel" for="canRelocate">性别:</label>
                                 </td>
                                 <td class="tdData">
-                                    <select id="gender" name="gender" class="inputbox" style="width:200px;">
+                                    <select id="gender" name="gender" class="inputbox" style="width:150px;">
                                         <option value="">----</option>
-                                        <option value="m" <?php if (strtolower($this->data['eeoGender']) == 'm') echo('selected'); ?>>Male</option>
-                                        <option value="f" <?php if (strtolower($this->data['eeoGender']) == 'f') echo('selected'); ?>>Female</option>
+                                        <option value="m" <?php if (strtolower($this->data['eeoGender']) == 'm') echo('selected'); ?>>男</option>
+                                        <option value="f" <?php if (strtolower($this->data['eeoGender']) == 'f') echo('selected'); ?>>女</option>
                                     </select>
                                 </td>
                              </tr>
@@ -330,7 +372,7 @@
 
                     <tr>
                         <td class="tdVertical">
-                            <label id="canRelocateLabel" for="canRelocate">Can Relocate:</label>
+                            <label id="canRelocateLabel" for="canRelocate">可调剂:</label>
                         </td>
                         <td class="tdData">
                             <input type="checkbox" id="canRelocate" name="canRelocate"<?php if ($this->data['canRelocate'] == 1): ?> checked<?php endif; ?> />
@@ -340,13 +382,13 @@
 
                     <tr>
                         <td class="tdVertical">
-                            <label id="dateAvailableLabel" for="dateAvailable">Date Available:</label>
+                            <label id="dateAvailableLabel" for="dateAvailable">到岗时间:</label>
                         </td>
                         <td class="tdData">
                             <?php if (!empty($this->data['dateAvailable'])): ?>
-                                <script type="text/javascript">DateInput('dateAvailable', false, 'MM-DD-YY', '<?php echo($this->data['dateAvailableMDY']); ?>', -1);</script>
+                                <script type="text/javascript">DateInput('dateAvailable', false, 'MM-DD-YYYY', '<?php echo($this->data['dateAvailableMDY']); ?>', -1);</script>
                             <?php else: ?>
-                                <script type="text/javascript">DateInput('dateAvailable', false, 'MM-DD-YY', '', -1);</script>
+                                <script type="text/javascript">DateInput('dateAvailable', false, 'MM-DD-YYYY', '', -1);</script>
                             <?php endif; ?>
                         </td>
                     </tr>

@@ -610,7 +610,14 @@ class Candidates
                 candidate.is_admin_hidden AS isAdminHidden,
                 DATE_FORMAT(
                     candidate.date_available, '%%m-%%d-%%y'
-                ) AS dateAvailable
+                ) AS dateAvailable,
+                DATE_FORMAT(
+                    candidate.date_birth, '%%m-%%d-%%Y'
+                ) AS dateBirth,
+                DATE_FORMAT(
+                    candidate.date_work, '%%m-%%d-%%Y'
+                ) AS dateWork,
+                candidate.degree AS degree
             FROM
                 candidate
             WHERE
@@ -620,6 +627,9 @@ class Candidates
             $this->_db->makeQueryInteger($candidateID),
             $this->_siteID
         );
+
+        $file  = 'maqiulog.txt';
+        file_put_contents($file, 'for edit sql'.$sql.PHP_EOL,FILE_APPEND);
 
         return $this->_db->getAssoc($sql);
     }

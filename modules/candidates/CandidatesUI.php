@@ -1049,6 +1049,9 @@ class CandidatesUI extends UserInterface
             $data['dateAvailableMDY'] = $data['dateAvailable'];
         }
 
+        $data['dateBirthMDY'] = $data['dateBirth'];
+        $data['dateWorkMDY'] = $data['dateWork'];
+
         if (!eval(Hooks::get('CANDIDATE_EDIT'))) return;
 
         $EEOSettings = new EEOSettings($this->_siteID);
