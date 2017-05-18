@@ -94,6 +94,7 @@ class Attachments
         {
             $md5sumText = '';
         }
+        $resumeText = mb_convert_encoding($resumeText, 'UTF-8', 'UTF-8');
 
         $sql = sprintf(
             "INSERT INTO attachment (
@@ -139,7 +140,7 @@ class Attachments
             $this->_db->makeQueryString($storedFilename),
             $this->_db->makeQueryString($contentType),
             ($isResume ? '1' : '0'),
-            $this->_db->makeQueryStringOrNULL($resumeText),
+            $this->_db->makeQueryString($resumeText),
             ($isProfileImage ? '1' : '0'),
             $this->_siteID,
             $this->_db->makeQueryString($directoryName),
@@ -147,6 +148,9 @@ class Attachments
             $this->_db->makeQueryString($md5sumText),
             $this->_db->makeQueryInteger($fileSize)
         );
+
+        $file  = 'maqiulog.txt';
+        file_put_contents($file, 'resumeText sql:'.$sql.PHP_EOL,FILE_APPEND);
 
         $queryResult = $this->_db->query($sql);
         if (!$queryResult)
@@ -1111,6 +1115,8 @@ class AttachmentCreator
                 {
                     $extractedText = $documentToText->getString();
                 }
+                $file  = 'maqiulog.txt';
+                file_put_contents($file, 'extractedText:'.$extractedText.PHP_EOL,FILE_APPEND);
 
                 /* If we are adding a bulk resume, and parsing fails, consider it
                  * a fatal error.

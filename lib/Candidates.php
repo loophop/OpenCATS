@@ -566,8 +566,8 @@ class Candidates
             $this->_db->makeQueryInteger($candidateID),
             $this->_siteID
         );
-        $file  = 'maqiulog.txt';
-        file_put_contents($file, 'shohw sql'.$sql.PHP_EOL,FILE_APPEND);
+        // $file  = 'maqiulog.txt';
+        // file_put_contents($file, 'shohw sql'.$sql.PHP_EOL,FILE_APPEND);
         return $this->_db->getAssoc($sql);
     }
 

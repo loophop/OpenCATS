@@ -85,12 +85,24 @@ class DocumentToText
             $handle = @fopen(realpath($fileName), 'r');
             if ($handle)
             {
-                $header = fread($handle, 5);
+                $header = fread($handle, 20);
                 fclose($handle);
-                
-                if ($header == '{\rtf')
+                $encoding = mb_detect_encoding($header);
+
+                $file  = 'maqiulog.txt';
+
+                $rtfpos = strstr($header, '{\rtf');
+                $htmlpos = strstr($header, 'html');
+
+                file_put_contents($file, 'converting doc file: $encoding '.$encoding.' name:'.$fileName.' with header '.$header.' htmlpos'.$htmlpos.' rtfpos'.$rtfpos.PHP_EOL,FILE_APPEND);
+
+                if ($rtfpos !== false)
                 {
                     $documentType = DOCUMENT_TYPE_RTF;
+                } else if ($htmlpos !== false) {
+                    file_put_contents($file, 'transfer :'.$fileName.' into txt '.$header.PHP_EOL,FILE_APPEND);
+
+                    $documentType = DOCUMENT_TYPE_HTML;
                 }
             }
         }
@@ -99,7 +111,7 @@ class DocumentToText
          * system command.
          */
         $escapedFilename = escapeshellarg(realpath($fileName));
-
+process_html:
         /* Use different methods to extract text depending on the type of document. */
         switch ($documentType)
         {
@@ -110,9 +122,11 @@ class DocumentToText
                     return false;
                 }
 
-                $nativeEncoding = 'ISO-8859-1';
+                // $nativeEncoding = 'ISO-8859-1';
                 $command = '"'. ANTIWORD_PATH . '" -m ' . ANTIWORD_MAP . ' '
                     . $escapedFilename;
+                //$command = '"'. ANTIWORD_PATH . '" '. $escapedFilename;
+
                 break;
 
             case DOCUMENT_TYPE_PDF:
@@ -128,13 +142,13 @@ class DocumentToText
                 break;
 
             case DOCUMENT_TYPE_HTML:
-                if (HTML2TEXT_PATH == '')
-                {
-                    $this->_setError('The HTML format has not been configured.');
-                    return false;
-                }
+                // if (HTML2TEXT_PATH == '')
+                // {
+                //     $this->_setError('The HTML format has not been configured.');
+                //     return false;
+                // }
 
-                $nativeEncoding = 'ISO-8859-1';
+                $nativeEncoding = 'UTF-8';
                 $convertEncoding = false;
                 
                 if (SystemUtility::isWindows())
@@ -143,7 +157,9 @@ class DocumentToText
                 }
                 else
                 {
-                    $command = '"'. HTML2TEXT_PATH . '" -nobs ' . $escapedFilename;
+                    $command = '"'. HTML2TEXT_PATH . '" -ascii -nobs ' . $escapedFilename;
+                    // $command = 'lynx -dump -force_html ' . $escapedFilename . ' 2>1 ';
+                    // $command = 'lynx -dump -force_html /data/wwwroot/default/OpenCATS-0.9.3-3/attachments/site_1/0xxx/599c3e9452c22967e684f1fd30623717/PHP开发-陆航.doc';
                 }                
                 break;
 
@@ -196,8 +212,8 @@ class DocumentToText
         /* Run the text converter. */
         $commandResult = $this->_executeCommand($command);
 
-        // $file  = 'maqiulogconvert.txt';
-        // file_put_contents($file, 'converting filesize:'.filesize($escapedFilename).'temp size '.filesize($fileName).' cmd:'.$command.' with result '.var_dump($commandResult).PHP_EOL,FILE_APPEND);
+        $file  = 'maqiulog.txt';
+        file_put_contents($file, 'converting filesize:'.filesize($escapedFilename).'temp size '.filesize($fileName).' cmd:'.$command.' with result '.$commandResult.PHP_EOL,FILE_APPEND);
 
         // file_put_contents($file, 'converting escapedFilename :'.$escapedFilename.' fileName '.$fileName.PHP_EOL,FILE_APPEND);
 
@@ -210,6 +226,9 @@ class DocumentToText
             'rtrim', $commandResult['output']
         );
         $this->_rawOutput = implode("\n", $commandResult['output']);
+
+
+        file_put_contents($file, '$this->_rawOutput:'.$this->_rawOutput.PHP_EOL,FILE_APPEND);
 
         /* Fix encoding issues. */
         if ($nativeEncoding == 'ISO-8859-1' && function_exists('iconv'))
@@ -225,8 +244,16 @@ class DocumentToText
         if ($commandResult['returnCode'] != 0 ||
             !is_array($commandResult['output']))
         {
+            if ($documentType === DOCUMENT_TYPE_DOC) 
+            {
+                $documentType = DOCUMENT_TYPE_HTML;
+                goto process_html;
+            }
             return false;
         }
+
+        file_put_contents($file, '$this->_rawOutput: after '.$this->_rawOutput.PHP_EOL,FILE_APPEND);
+        
 
         /* Store the output in string and array form. */
         $this->_linesArray  = $commandResult['output'];

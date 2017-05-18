@@ -31,10 +31,10 @@
 define('LICENSE_KEY','3163GQ-54ISGW-14E4SHD-ES9ICL-X02DTG-GYRSQ6');
 
 /* Database configuration. */
-define('DATABASE_USER', 'cats');
-define('DATABASE_PASS', 'password');
-define('DATABASE_HOST', 'localhost');
-define('DATABASE_NAME', 'cats_dev');
+define('DATABASE_USER', 'root');
+define('DATABASE_PASS', '37YHJZjmJADhETV');
+define('DATABASE_HOST', '115.159.54.253');
+define('DATABASE_NAME', 'opencats');
 
 /* Authentication Configuration
  * Options are sql, ldap, sql+ldap
@@ -53,26 +53,26 @@ define('SSL_ENABLED', false);
  * 'C:\\antiword\\antiword.exe'. Windows Antiword will have problems locating
  * mapping files if you install it anywhere but C:\antiword\.
  */
-define('ANTIWORD_PATH', "\\path\\to\\antiword");
-define('ANTIWORD_MAP', '8859-1.txt');
+define('ANTIWORD_PATH', "/usr/bin/antiword");
+define('ANTIWORD_MAP', 'UTF-8.txt');
 
 /* XPDF / pdftotext settings. Remember to use double backslashes (\) to represent
  * one backslash (\).
  * http://www.foolabs.com/xpdf/
  */
-define('PDFTOTEXT_PATH', "\\path\\to\\pdftotext");
+define('PDFTOTEXT_PATH', "/usr/bin/pdftotext");
 
 /* html2text settings. Remember to use double backslashes (\) to represent
  * one backslash (\). 'html2text' can be found at:
  * http://www.mbayer.de/html2text/
  */
-define('HTML2TEXT_PATH', "\\path\\to\\html2text");
+define('HTML2TEXT_PATH', "/usr/bin/html2text");
 
 /* UnRTF settings. Remember to use double backslashes (\) to represent
  * one backslash (\). 'unrtf' can be found at:
  * http://www.gnu.org/software/unrtf/unrtf.html
  */
-define('UNRTF_PATH', "\\path\\to\unrtf");
+define('UNRTF_PATH', "");
 
 /* Temporary directory. Set this to a directory that is writable by the
  * web server. The default should be fine for most systems. Remember to
@@ -171,7 +171,7 @@ define('FORGOT_PASSWORD_BODY',      'You recently requested that your OpenCATS: 
 define('ENABLE_DEMO_MODE', false);
 
 /* Offset to GMT Time. */
-define('OFFSET_GMT', 2);
+define('OFFSET_GMT', 8);
 
 /* Should we enforce only one session per user (excluding demo)? */
 define('ENABLE_SINGLE_SESSION', false);
@@ -210,11 +210,11 @@ define('MAIL_SENDMAIL_PATH', "/usr/sbin/sendmail");
  * set to 3. If your server requires authentication, set MAIL_SMTP_AUTH to
  * true and configure MAIL_SMTP_USER and MAIL_SMTP_PASS.
  */
-define('MAIL_SMTP_HOST', "localhost");
-define('MAIL_SMTP_PORT', 587);
+define('MAIL_SMTP_HOST', "smtp.exmail.qq.com");
+define('MAIL_SMTP_PORT', 25);
 define('MAIL_SMTP_AUTH', true);
-define('MAIL_SMTP_USER', "user");
-define('MAIL_SMTP_PASS', "password");
+define('MAIL_SMTP_USER', "version-control@papegames.net");
+define('MAIL_SMTP_PASS', "AAbb123456");
 //Options: '', 'ssl' or 'tls'
 define('MAIL_SMTP_SECURE', "tls");
 
@@ -275,15 +275,5 @@ define ('LDAP_ATTRIBUTE_FIRSTNAME', 'givenname');
 define ('LDAP_ATTRIBUTE_EMAIL', 'mail');
 
 define ('LDAP_SITEID', 1);
-
-/* Job Types mapping
- */
-/* Uncomment bellow if you want custom mapping */
-/*const JOB_TYPES_LIST = array(
-    'PT' => 'Part-Time',
-    'FT' => 'Full-Time',
-    'ST' => 'Student',
-    'FL' => 'Freelance'
-);*/
 
 ?>

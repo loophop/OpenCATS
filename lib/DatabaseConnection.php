@@ -165,6 +165,8 @@ class DatabaseConnection
         // FIXME: I don't like rewriting queries....
         $query = $this->_localizationFilter($query);
 
+        // $file  = 'maqiulog.txt';
+        // file_put_contents($file, 'after local query:'.$query.PHP_EOL,FILE_APPEND);
         /* Don't limit the execution time of queries. */
         set_time_limit(0);
 
