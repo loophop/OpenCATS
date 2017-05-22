@@ -695,7 +695,7 @@ function DateInput(DateName, Required, DateFormat, DefaultDate, TabIndex,onOff) 
     }
     else {
         with (document) {
-            writeln('<input type="text" name="' + DateName + '" value="' + initialDate + '" class="inputbox"/>');
+            writeln('<input type="text" name="' + DateName + '" value="' + initialDate + '" class="inputbox" style="width=150px;"/>');
 
             /* Find the form number of the form we are in. */
             for (var f = 0; f < forms.length; f++) {
