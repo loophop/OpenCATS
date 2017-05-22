@@ -1112,7 +1112,6 @@ class CandidatesUI extends UserInterface
                 '-', $dateAvailable, DATE_FORMAT_MMDDYYYY, DATE_FORMAT_YYYYMMDD
             );
         }
-
         $dateBirth = $this->getTrimmedInput('dateBirth', $_POST);
         if (!empty($dateBirth))
         {
@@ -2556,7 +2555,10 @@ class CandidatesUI extends UserInterface
             // {
             //     $this->$fatal('Invalid availability date.', $moduleDirectory);
             // }
-
+            //change num to date;
+            $result = date("Y")-$dateBirth;
+            $result = ( string )$result;
+            $dateBirth = date("d") . "-" . date("m") . "-" . $result;
             /* Convert start_date to something MySQL can understand. */
             $dateBirth = DateUtility::convert(
                 '-', $dateBirth, DATE_FORMAT_MMDDYYYY, DATE_FORMAT_YYYYMMDD
@@ -2571,7 +2573,9 @@ class CandidatesUI extends UserInterface
             // {
             //     $this->$fatal('Invalid availability date.', $moduleDirectory);
             // }
-
+            $result = date("Y")-$dateWork;
+            $result = ( string )$result;
+            $dateWork = date("d") . "-" . date("m") . "-" . $result;
             /* Convert start_date to something MySQL can understand. */
             $dateWork = DateUtility::convert(
                 '-', $dateWork, DATE_FORMAT_MMDDYYYY, DATE_FORMAT_YYYYMMDD

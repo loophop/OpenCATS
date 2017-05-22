@@ -43,7 +43,7 @@
                 <?php $URI = CATSUtility::getIndexName() . '?m=candidates&amp;a=add'; ?>
             <?php endif; ?>
 
-            <form name="addCandidateForm" id="addCandidateForm" enctype="multipart/form-data" action="<?php echo($URI); ?>" method="post" onsubmit="return (checkAddForm(document.addCandidateForm) && onSubmitEmailInSystem() && onSubmitPhoneInSystem());" autocomplete="off" enctype="multipart/form-data">
+            <form name="addCandidateForm" id="addCandidateForm"  enctype="multipart/form-data" action="<?php echo($URI); ?>" method="post" onsubmit="return (checkAddForm(document.addCandidateForm) && onSubmitEmailInSystem() && onSubmitPhoneInSystem());" autocomplete="off" enctype="multipart/form-data">
                 <?php if ($this->isModal): ?>
                     <input type="hidden" name="jobOrderID" id="jobOrderID" value="<?php echo($this->jobOrderID); ?>" />
                 <?php endif; ?>
@@ -182,6 +182,7 @@
                             <label id="dateBirthLabel" for="dateBirth">出生年月:</label>
                         </td>
                         <td class="tdData">
+
                             <script type="text/javascript">DateInput('dateAvailable', false, 'MM-DD-YY', '', <?php echo($tabIndex++); ?>);</script>
 
                             <?php /* DateInput()s take up 3 tabindexes. */ ?>
@@ -190,10 +191,10 @@
                     </tr> -->
                     <tr>
                         <td class="tdVertical">
-                            <label id="dateBirthLabel" for="dateBirth">出生年月:</label>
+                            <label id="dateBirthLabel" for="dateBirth">年龄:</label>
                         </td>
                         <td class="tdData">
-                            <script type="text/javascript">DateInput('dateBirth', false, 'MM-DD-YYYY', '', -1);</script>
+                            <script type="text/javascript">DateInput('dateBirth', false, 'MM-DD-YYYY', '', -1,true);</script>
 
                             <?php /* DateInput()s take up 3 tabindexes. */ ?>
                             <?php $tabIndex += 2; ?>
@@ -201,10 +202,10 @@
                     </tr>
                     <tr>
                         <td class="tdVertical">
-                            <label id="dateWorkLabel" for="dateWork">开始搬砖年月:</label>
+                            <label id="dateWorkLabel" for="dateWork">工龄:</label>
                         </td>
                         <td class="tdData">
-                            <script type="text/javascript">DateInput('dateWork', false, 'MM-DD-YYYY', '', -1);</script>
+                            <script type="text/javascript">DateInput('dateWork', false, 'MM-DD-YYYY', '', -1,true);</script>
 
                             <?php /* DateInput()s take up 3 tabindexes. */ ?>
                             <?php $tabIndex += 2; ?>

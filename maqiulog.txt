@@ -1,0 +1,185 @@
+before add dateBirth 01-01-2017
+after convert dateBirth 2017-01-01
+$this->_userID 1252
+before add dateBirth 01-01-2017
+after convert dateBirth 2017-01-01
+$this->_userID 1252
+before add dateBirth 01-01-2017
+after convert dateBirth 2017-01-01
+$this->_userID 1252
+before add dateBirth 02-01-2017
+after convert dateBirth 2017-02-01
+$this->_userID 1252
+before add dateBirth 02-01-2017
+after convert dateBirth 2017-02-01
+$this->_userID 1252
+before add dateBirth 
+$this->_userID 1252
+before add dateBirth 111
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 111
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 
+$this->_userID 1252
+before add dateBirth 
+$this->_userID 1252
+before add dateBirth 11
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 11
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 11
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 20
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 1
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 1
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 11
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 11
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 111
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 111
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 111
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 111
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 111
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 111
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 111
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 111
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 111
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 111
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 111
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 111
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 111
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 111
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 111
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 111
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 111
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+validate $separator-$dateString01-01-2017$format16
+validate $month1$day1$year2017
+before add dateBirth 
+$this->_userID 1252
+validate $separator-$dateString01-01-2017$format16
+validate $month1$day1$year2017
+before add dateBirth 
+$this->_userID 1252
+before add dateBirth 01-01-2017
+after convert dateBirth 2017-01-01
+$this->_userID 1252
+before add dateBirth 01-01-2017
+after convert dateBirth 2017-01-01
+$this->_userID 1252
+before add dateBirth 1
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 1
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 11
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 11
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 1
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 1
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 1111
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 1111
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 22
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 22
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 22
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 22
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 22
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 22
+num 1995
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 22
+num 1995
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 22
+num 1995
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 22
+num 1995
+after convert dateBirth 0000-00-00
+$this->_userID 1252
+before add dateBirth 22
+num 1995
+after convert dateBirth 1996-07-05
+$this->_userID 1252
+before add dateBirth 22
+num 1995
+after convert dateBirth 1996-07-05
+$this->_userID 1252
+before add dateBirth 22
+after convert dateBirth 1996-07-05
+$this->_userID 1252
+before add dateBirth 20
+after convert dateBirth 1998-07-05
+$this->_userID 1252

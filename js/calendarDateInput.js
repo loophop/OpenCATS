@@ -544,16 +544,14 @@ function calendarObject(DateName, DateFormat, DefaultDate) {
    }
 }
 
-function DateInput(DateName, Required, DateFormat, DefaultDate, TabIndex)
-{
+function DateInput(DateName, Required, DateFormat, DefaultDate, TabIndex,onOff) {
     var CurrentDate = new storedMonthObject(
         DateFormat, Today.getFullYear(), Today.getMonth(), Today.getDate()
     );
 
     DateFormat = DateFormat.toUpperCase();
 
-    if (!(/^(Y{2,4}(-|\/)?)?((MON)|(MM?M?)|(DD?))(-|\/)?((MON)|(MM?M?)|(DD?))((-|\/)Y{2,4})?$/i.test(DateFormat)))
-    {
+    if (!(/^(Y{2,4}(-|\/)?)?((MON)|(MM?M?)|(DD?))(-|\/)?((MON)|(MM?M?)|(DD?))((-|\/)Y{2,4})?$/i.test(DateFormat))) {
         alert(
             'Error: The specified date format for the \'' + DateName +
             '\' field, \'' + DateFormat + '\', is invalid.'
@@ -562,8 +560,7 @@ function DateInput(DateName, Required, DateFormat, DefaultDate, TabIndex)
     }
 
     /* If DefaultDate is required but not specified, use today's date. */
-    if (DefaultDate == '' && Required)
-    {
+    if (DefaultDate == '' && Required) {
         DefaultDate = CurrentDate.formatted;
     }
 
@@ -579,141 +576,217 @@ function DateInput(DateName, Required, DateFormat, DefaultDate, TabIndex)
     eval('var object = ' + DateName + '_Object;');
 
     /* Determine initial state of day and year inputs and the calendar icon. */
-    if (Required || DefaultDate != '')
-    {
+    if (Required || DefaultDate != '') {
         var initialStatus = '';
         //console.log("object.picked.formatted"+object.picked.formatted);
         var initialDate = object.picked.formatted;
     }
-    else
-    {
+    else {
         var initialStatus = ' style="visibility:hidden"';
         var initialDate = '';
         object.setPicked(Today.getFullYear(), Today.getMonth(), Today.getDate());
     }
 
     /* Calculate tab indexes. */
-    if (TabIndex != -1)
-    {
+    if (TabIndex != -1) {
         var tabIndexA = ' tabindex="' + TabIndex + '"';
         var tabIndexB = ' tabindex="' + (TabIndex + 1) + '"';
         var tabIndexC = ' tabindex="' + (TabIndex + 2) + '"';
     }
-    else
-    {
+    else {
         var tabIndexA = '';
         var tabIndexB = '';
         var tabIndexC = '';
     }
 
     /* Create form elements; etc. */
-    with (document)
-    {
-        writeln('<input type="hidden" name="' + DateName + '" value="' + initialDate + '" />');
+    if (!onOff) {
+        with (document) {
+            writeln('<input type="hidden" name="' + DateName + '" value="' + initialDate + '" />');
 
-        /* Find the form number of the form we are in. */
-        for (var f = 0; f < forms.length; f++)
-        {
-            for (var e = 0; e < forms[f].elements.length; e++)
-            {
-                if (typeof(forms[f].elements[e].type) == 'string' &&
-                    forms[f].elements[e].type == 'hidden' &&
-                    forms[f].elements[e].name == DateName)
-                {
-                    object.formNumber = f;
-                    break;
+            /* Find the form number of the form we are in. */
+            for (var f = 0; f < forms.length; f++) {
+                for (var e = 0; e < forms[f].elements.length; e++) {
+                    if (typeof(forms[f].elements[e].type) == 'string' &&
+                        forms[f].elements[e].type == 'hidden' &&
+                        forms[f].elements[e].name == DateName) {
+                        object.formNumber = f;
+                        break;
+                    }
                 }
             }
+
+            writeln('<table style="padding: 0px; border-spacing: 0px; margin: 0px;">');
+            writeln('<tr>');
+
+            writeln('<td style="padding: 0px 3px 0px 0px; margin: 0px;">');
+            writeln('<select' + tabIndexA + ' class="calendarDateInput" id="' + DateName + '_Month_ID" onchange="' + objectName + '.changeMonth(this);">');
+
+            if (!Required) {
+                if (DefaultDate == '') {
+                    writeln('<option selected="selected" value="">none</option>');
+                }
+                else {
+                    writeln('<option value="">None</option>');
+                }
+            }
+
+            for (var i = 0; i < 12; i++) {
+                if (object.picked.monthIndex == i && DefaultDate != '') {
+                    MonthSelected = ' selected="selected"';
+                }
+                else {
+                    MonthSelected = '';
+                }
+
+                writeln('<option value="' + i + '"' + MonthSelected + '>' + MonthNames[i].substr(0, 3) + '</option>');
+            }
+
+            writeln('</select>');
+            writeln('</td>');
+
+            writeln('<td style="padding: 0px 3px 0px 0px; margin: 0px;">');
+            writeln('<select' + tabIndexB + initialStatus + ' class="calendarDateInput" id="' + DateName + '_Day_ID" onchange="' + objectName + '.changeDay(this);">');
+
+            for (var j = 1; j <= 31; j++) {
+                if (object.picked.day == j && DefaultDate != '') {
+                    DaySelected = ' selected="selected"';
+                }
+                else {
+                    DaySelected = '';
+                }
+
+                writeln('<option value="' + j + '"' + DaySelected + '>' + j + '</option>');
+            }
+
+            writeln('</select>');
+            writeln('</td>');
+
+            writeln('<td style="padding: 0px 3px 0px 0px; margin: 0px;">');
+            writeln('<input' + tabIndexC + initialStatus + ' class="calendarDateInput" type="text" id="' + DateName + '_Year_ID" size="' + object.picked.yearPad.length + '" maxlength="' + object.picked.yearPad.length + '" title="Year" value="' + object.picked.yearPad + '" onKeyPress="return YearDigitsOnly(event);" onkeyup="' + objectName + '.checkYear(this);" onBlur="' + objectName + '.fixYear(this);" />');
+            writeln('<td style="padding: 0px 3px 0px 0px; margin: 0px;"><a' + initialStatus + ' id="' + DateName + '_ID_Link" href="javascript:' + objectName + '.show();" onmouseover="return ' + objectName + '.iconHover(true);" onmouseout="return ' + objectName + '.iconHover(false);"><img src="' + ImageURL + '" style="vertical-align: middle; border: none;" title="Calendar" /></a>&nbsp;');
+
+            writeln('<span id="' + DateName + '_ID" style="position: absolute; visibility: hidden; width: ' + (CellWidth * 7) + 'px; background-color: ' + CalBGColor + '; border: 1px solid dimgray;" onmouseover="' + objectName + '.handleTimer(true);" onmouseout="' + objectName + '.handleTimer(false);">');
+
+            writeln('<table width="' + (CellWidth * 7) + '" cellspacing="0" cellpadding="1">');
+
+            writeln('<tr style="background-color:' + TopRowBGColor + ';">');
+            writeln('<td id="' + DateName + '_Previous_ID" style="cursor: default;" align="center" class="calendarDateInput" style="height: ' + CellHeight + '" onclick="' + objectName + '.previous.go();" onMouseDown="VirtualButton(this, true);" onMouseUp="VirtualButton(this, false);" onmouseover="return ' + objectName + '.previous.hover(this, true)" onmouseout="return ' + objectName + '.previous.hover(this, false);" title="' + object.previous.monthName + '"><img src="' + PrevURL + '"></td>');
+            writeln('<td id="' + DateName + '_Current_ID" style="cursor: pointer;" align="center" class="calendarDateInput" style="height: ' + CellHeight + '" colspan="5" onclick="' + objectName + '.displayed.goCurrent();" onmouseover="self.status=\'Click to view ' + CurrentDate.fullName + '\'; return true;" onmouseout="self.status = \'\'; return true;" title="Show Current Month">' + object.displayed.fullName + '</td>');
+            writeln('<td id="' + DateName + '_Next_ID" style="cursor: default;" align="center" class="calendarDateInput" style="height: ' + CellHeight + '" onclick="' + objectName + '.next.go();" onMouseDown="VirtualButton(this, true);" onMouseUp="VirtualButton(this, false);" onmouseover="return ' + objectName + '.next.hover(this, true);" onmouseout="return ' + objectName + '.next.hover(this, false);" title="' + object.next.monthName + '"><img src="' + NextURL + '" /></td>');
+            writeln('</tr>');
+
+            writeln('<tr>');
+            for (var w = 0; w < 7; w++) {
+                writeln('<td width="' + CellWidth + '" align="center" class="calendarDateInput" style="height:' + CellHeight + '; width:' + CellWidth + '; font-weight: bold; border-top: 1px solid dimgray; border-bottom: 1px solid dimgray;">' + WeekDays[w] + '</td>');
+            }
+            writeln('</tr>');
+
+            writeln('</table>');
+
+            writeln('<span id="' + DateName + '_DayTable_ID">' + object.buildCalendar() + '</span>');
+
+            writeln('</span>');
+
+            writeln('</td>');
+            writeln('</tr>');
+            writeln('</table>');
         }
+    }
+    else {
+        with (document) {
+            writeln('<input type="text" name="' + DateName + '" value="' + initialDate + '" class="inputbox"/>');
 
-        writeln('<table style="padding: 0px; border-spacing: 0px; margin: 0px;">');
-        writeln('<tr>');
-
-        writeln('<td style="padding: 0px 3px 0px 0px; margin: 0px;">');
-        writeln('<select' + tabIndexA + ' class="calendarDateInput" id="' + DateName + '_Month_ID" onchange="' + objectName + '.changeMonth(this);">');
-
-        if (!Required)
-        {
-            if (DefaultDate == '')
-            {
-                writeln('<option selected="selected" value="">None</option>');
+            /* Find the form number of the form we are in. */
+            for (var f = 0; f < forms.length; f++) {
+                for (var e = 0; e < forms[f].elements.length; e++) {
+                    if (typeof(forms[f].elements[e].type) == 'string' &&
+                        forms[f].elements[e].type == 'hidden' &&
+                        forms[f].elements[e].name == DateName) {
+                        object.formNumber = f;
+                        break;
+                    }
+                }
             }
-            else
-            {
-                writeln('<option value="">None</option>');
+
+            writeln('<table style="padding: 0px; border-spacing: 0px; margin: 0px;display: none;">');
+            writeln('<tr>');
+
+            writeln('<td style="padding: 0px 3px 0px 0px; margin: 0px;">');
+            writeln('<select' + tabIndexA + ' class="calendarDateInput" id="' + DateName + '_Month_ID" onchange="' + objectName + '.changeMonth(this);">');
+
+            if (!Required) {
+                if (DefaultDate == '') {
+                    writeln('<option selected="selected" value="">none</option>');
+                }
+                else {
+                    writeln('<option value="">None</option>');
+                }
             }
+
+            for (var i = 0; i < 12; i++) {
+                if (object.picked.monthIndex == i && DefaultDate != '') {
+                    MonthSelected = ' selected="selected"';
+                }
+                else {
+                    MonthSelected = '';
+                }
+
+                writeln('<option value="' + i + '"' + MonthSelected + '>' + MonthNames[i].substr(0, 3) + '</option>');
+            }
+
+            writeln('</select>');
+            writeln('</td>');
+
+            writeln('<td style="padding: 0px 3px 0px 0px; margin: 0px;">');
+            writeln('<select' + tabIndexB + initialStatus + ' class="calendarDateInput" id="' + DateName + '_Day_ID" onchange="' + objectName + '.changeDay(this);">');
+
+            for (var j = 1; j <= 31; j++) {
+                if (object.picked.day == j && DefaultDate != '') {
+                    DaySelected = ' selected="selected"';
+                }
+                else {
+                    DaySelected = '';
+                }
+
+                writeln('<option value="' + j + '"' + DaySelected + '>' + j + '</option>');
+            }
+
+            writeln('</select>');
+            writeln('</td>');
+
+            writeln('<td style="padding: 0px 3px 0px 0px; margin: 0px;">');
+            writeln('<input' + tabIndexC + initialStatus + ' class="calendarDateInput" type="text" id="' + DateName + '_Year_ID" size="' + object.picked.yearPad.length + '" maxlength="' + object.picked.yearPad.length + '" title="Year" value="' + object.picked.yearPad + '" onKeyPress="return YearDigitsOnly(event);" onkeyup="' + objectName + '.checkYear(this);" onBlur="' + objectName + '.fixYear(this);" />');
+            writeln('<td style="padding: 0px 3px 0px 0px; margin: 0px;"><a' + initialStatus + ' id="' + DateName + '_ID_Link" href="javascript:' + objectName + '.show();" onmouseover="return ' + objectName + '.iconHover(true);" onmouseout="return ' + objectName + '.iconHover(false);"><img src="' + ImageURL + '" style="vertical-align: middle; border: none;" title="Calendar" /></a>&nbsp;');
+
+            writeln('<span id="' + DateName + '_ID" style="position: absolute; visibility: hidden; width: ' + (CellWidth * 7) + 'px; background-color: ' + CalBGColor + '; border: 1px solid dimgray;" onmouseover="' + objectName + '.handleTimer(true);" onmouseout="' + objectName + '.handleTimer(false);">');
+
+            writeln('<table width="' + (CellWidth * 7) + '" cellspacing="0" cellpadding="1">');
+
+            writeln('<tr style="background-color:' + TopRowBGColor + ';">');
+            writeln('<td id="' + DateName + '_Previous_ID" style="cursor: default;" align="center" class="calendarDateInput" style="height: ' + CellHeight + '" onclick="' + objectName + '.previous.go();" onMouseDown="VirtualButton(this, true);" onMouseUp="VirtualButton(this, false);" onmouseover="return ' + objectName + '.previous.hover(this, true)" onmouseout="return ' + objectName + '.previous.hover(this, false);" title="' + object.previous.monthName + '"><img src="' + PrevURL + '"></td>');
+            writeln('<td id="' + DateName + '_Current_ID" style="cursor: pointer;" align="center" class="calendarDateInput" style="height: ' + CellHeight + '" colspan="5" onclick="' + objectName + '.displayed.goCurrent();" onmouseover="self.status=\'Click to view ' + CurrentDate.fullName + '\'; return true;" onmouseout="self.status = \'\'; return true;" title="Show Current Month">' + object.displayed.fullName + '</td>');
+            writeln('<td id="' + DateName + '_Next_ID" style="cursor: default;" align="center" class="calendarDateInput" style="height: ' + CellHeight + '" onclick="' + objectName + '.next.go();" onMouseDown="VirtualButton(this, true);" onMouseUp="VirtualButton(this, false);" onmouseover="return ' + objectName + '.next.hover(this, true);" onmouseout="return ' + objectName + '.next.hover(this, false);" title="' + object.next.monthName + '"><img src="' + NextURL + '" /></td>');
+            writeln('</tr>');
+
+            writeln('<tr>');
+            for (var w = 0; w < 7; w++) {
+                writeln('<td width="' + CellWidth + '" align="center" class="calendarDateInput" style="height:' + CellHeight + '; width:' + CellWidth + '; font-weight: bold; border-top: 1px solid dimgray; border-bottom: 1px solid dimgray;">' + WeekDays[w] + '</td>');
+            }
+            writeln('</tr>');
+
+            writeln('</table>');
+
+            writeln('<span id="' + DateName + '_DayTable_ID">' + object.buildCalendar() + '</span>');
+
+            writeln('</span>');
+
+            writeln('</td>');
+            writeln('</tr>');
+            writeln('</table>');
         }
-
-        for (var i = 0; i < 12; i++)
-        {
-            if (object.picked.monthIndex == i && DefaultDate != '')
-            {
-                MonthSelected = ' selected="selected"';
-            }
-            else
-            {
-                MonthSelected = '';
-            }
-
-            writeln('<option value="' + i + '"' + MonthSelected + '>' + MonthNames[i].substr(0, 3) + '</option>');
-        }
-
-        writeln('</select>');
-        writeln('</td>');
-
-        writeln('<td style="padding: 0px 3px 0px 0px; margin: 0px;">');
-        writeln('<select' + tabIndexB + initialStatus + ' class="calendarDateInput" id="' + DateName + '_Day_ID" onchange="' + objectName + '.changeDay(this);">');
-
-        for (var j = 1; j <= 31; j++)
-        {
-            if (object.picked.day == j && DefaultDate != '')
-            {
-                DaySelected = ' selected="selected"';
-            }
-            else
-            {
-                DaySelected = '';
-            }
-
-            writeln('<option value="' + j + '"' + DaySelected + '>' + j + '</option>');
-        }
-
-        writeln('</select>');
-        writeln('</td>');
-
-        writeln('<td style="padding: 0px 3px 0px 0px; margin: 0px;">');
-        writeln('<input' + tabIndexC + initialStatus + ' class="calendarDateInput" type="text" id="' + DateName + '_Year_ID" size="' + object.picked.yearPad.length + '" maxlength="' + object.picked.yearPad.length + '" title="Year" value="' + object.picked.yearPad + '" onKeyPress="return YearDigitsOnly(event);" onkeyup="' + objectName + '.checkYear(this);" onBlur="' + objectName + '.fixYear(this);" />');
-        writeln('<td style="padding: 0px 3px 0px 0px; margin: 0px;"><a' + initialStatus + ' id="' + DateName + '_ID_Link" href="javascript:' + objectName + '.show();" onmouseover="return ' + objectName + '.iconHover(true);" onmouseout="return ' + objectName + '.iconHover(false);"><img src="' + ImageURL + '" style="vertical-align: middle; border: none;" title="Calendar" /></a>&nbsp;');
-
-        writeln('<span id="' + DateName + '_ID" style="position: absolute; visibility: hidden; width: ' + (CellWidth * 7) + 'px; background-color: ' + CalBGColor + '; border: 1px solid dimgray;" onmouseover="' + objectName + '.handleTimer(true);" onmouseout="' + objectName + '.handleTimer(false);">');
-
-        writeln('<table width="' + (CellWidth * 7) + '" cellspacing="0" cellpadding="1">');
-
-        writeln('<tr style="background-color:' + TopRowBGColor + ';">');
-        writeln('<td id="' + DateName + '_Previous_ID" style="cursor: default;" align="center" class="calendarDateInput" style="height: ' + CellHeight + '" onclick="' + objectName + '.previous.go();" onMouseDown="VirtualButton(this, true);" onMouseUp="VirtualButton(this, false);" onmouseover="return ' + objectName + '.previous.hover(this, true)" onmouseout="return ' + objectName + '.previous.hover(this, false);" title="' + object.previous.monthName + '"><img src="' + PrevURL + '"></td>');
-        writeln('<td id="' + DateName + '_Current_ID" style="cursor: pointer;" align="center" class="calendarDateInput" style="height: ' + CellHeight + '" colspan="5" onclick="' + objectName + '.displayed.goCurrent();" onmouseover="self.status=\'Click to view ' + CurrentDate.fullName + '\'; return true;" onmouseout="self.status = \'\'; return true;" title="Show Current Month">' + object.displayed.fullName + '</td>');
-        writeln('<td id="' + DateName + '_Next_ID" style="cursor: default;" align="center" class="calendarDateInput" style="height: ' + CellHeight + '" onclick="' + objectName + '.next.go();" onMouseDown="VirtualButton(this, true);" onMouseUp="VirtualButton(this, false);" onmouseover="return ' + objectName + '.next.hover(this, true);" onmouseout="return ' + objectName + '.next.hover(this, false);" title="' + object.next.monthName + '"><img src="' + NextURL + '" /></td>');
-        writeln('</tr>');
-
-        writeln('<tr>');
-        for (var w = 0; w < 7; w++)
-        {
-            writeln('<td width="' + CellWidth + '" align="center" class="calendarDateInput" style="height:' + CellHeight + '; width:' + CellWidth + '; font-weight: bold; border-top: 1px solid dimgray; border-bottom: 1px solid dimgray;">' + WeekDays[w] + '</td>');
-        }
-        writeln('</tr>');
-
-        writeln('</table>');
-
-        writeln('<span id="' + DateName + '_DayTable_ID">' + object.buildCalendar() + '</span>');
-
-        writeln('</span>');
-
-        writeln('</td>');
-        writeln('</tr>');
-        writeln('</table>');
     }
 }
-
 function DateInputForDOM(DateName, Required, DateFormat, DefaultDate, TabIndex)
 {
     var CurrentDate = new storedMonthObject(
