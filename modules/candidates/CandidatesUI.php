@@ -2559,8 +2559,8 @@ class CandidatesUI extends UserInterface
             $result = date("Y")-$dateBirth;
             file_put_contents($file, ' year '.$result.PHP_EOL,FILE_APPEND);
             $result = ( string )$result;
-            //$dateBirth = date("m") . "-" . date("d") . "-" . $result;
-            $dateBirth = "01-17-1995";
+            $dateBirth = date("m") . "-" . date("d") . "-" . $result;
+            //$dateBirth = "01-17-1995";
             /* Convert start_date to something MySQL can understand. */
             $dateBirth = DateUtility::convert(
                 '-', $dateBirth, DATE_FORMAT_MMDDYYYY, DATE_FORMAT_YYYYMMDD
@@ -2577,7 +2577,7 @@ class CandidatesUI extends UserInterface
             // }
             $result = date("Y")-$dateWork;
             $result = ( string )$result;
-            $dateWork = date("d") . "-" . date("m") . "-" . $result;
+            $dateWork = date("m") . "-" . date("d") . "-" . $result;
             /* Convert start_date to something MySQL can understand. */
             $dateWork = DateUtility::convert(
                 '-', $dateWork, DATE_FORMAT_MMDDYYYY, DATE_FORMAT_YYYYMMDD
