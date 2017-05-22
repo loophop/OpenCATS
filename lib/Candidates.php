@@ -470,8 +470,8 @@ class Candidates
             "SELECT
                 candidate.candidate_id AS candidateID,
                 candidate.is_active AS isActive,
-                ((year(now())-year(candidate.date_birth)-1)) AS age,
-                ((year(now())-year(candidate.date_work)-1)) AS workage,
+                ((year(now())-year(candidate.date_birth))) AS age,
+                ((year(now())-year(candidate.date_work))+1) AS workage,
                 candidate.full_name AS fullName,
                 candidate.first_name AS firstName,
                 candidate.middle_name AS middleName,
